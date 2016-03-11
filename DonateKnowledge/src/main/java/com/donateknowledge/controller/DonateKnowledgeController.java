@@ -170,6 +170,53 @@ public class DonateKnowledgeController {
 		return mv;
 	}
 
+	
+	@RequestMapping(value = {"/confirmReceive"}, method = RequestMethod.POST)
+	public ModelAndView submitReceivedBook(
+			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
+			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
+
+		String title = StringEscapeUtils.escapeHtml4(request.getParameter("productName"));
+		String post = StringEscapeUtils.escapeHtml4(request.getParameter("manufacturer"));
+		String tags = StringEscapeUtils.escapeHtml4(request.getParameter("modelName"));
+
+		String bookTitle = StringEscapeUtils.escapeHtml4(request.getParameter("bookTitle"));
+		String authorName = StringEscapeUtils.escapeHtml4(request.getParameter("authorName"));
+		String publisherName = StringEscapeUtils.escapeHtml4(request.getParameter("publisherName"));
+		String isbn = StringEscapeUtils.escapeHtml4(request.getParameter("isbn"));
+		String year = StringEscapeUtils.escapeHtml4(request.getParameter("year"));
+		String edition = StringEscapeUtils.escapeHtml4(request.getParameter("edition"));
+		String mrpPrice = StringEscapeUtils.escapeHtml4(request.getParameter("mrpPrice"));
+		String piecesInStock = StringEscapeUtils.escapeHtml4(request.getParameter("piecesInStock"));
+
+		System.out.println("testing productName:" + bookTitle + ", manufacturer:" + bookTitle + ", modelName:" + bookTitle);
+
+		Book book = new Book();
+		book.setAuthorName(authorName);
+		book.setBookTitle(bookTitle);
+		book.setEdition(edition);
+		book.setGenre("");
+
+		ModelAndView mv = new ModelAndView("donateSuccess");
+		User user = service.getLoggedInUser(cookieValue, session, response);
+		if (user != null) {
+			mv.addObject(USER, user);
+		}
+		book.setInsertedBy(user.getEmail());
+		book.setInsertedDate(new Date());
+		book.setIsbn(isbn);
+		if (mrpPrice != null && "".equals(mrpPrice)) {
+			book.setMrpPrice(new BigDecimal(mrpPrice));
+		}
+		book.setPiecesInStock(new BigInteger(piecesInStock));
+		book.setProductCategory(ProductCategory.BOOK.getValue());
+		book.setPublisherName(publisherName);
+		book.setYear(Integer.valueOf(year));
+		
+		service.insertBook(book);
+		mv.addObject("phoneFinder", null);
+		return mv;
+	}
 	@RequestMapping(value = { "/donate" }, method = RequestMethod.GET)
 	public ModelAndView donate(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
