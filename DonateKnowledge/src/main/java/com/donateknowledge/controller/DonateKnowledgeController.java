@@ -30,6 +30,7 @@ import com.donateknowledge.dto.product.Product;
 import com.donateknowledge.dto.product.ProductCategory;
 import com.donateknowledge.dto.product.book.Book;
 import com.donateknowledge.dto.user.User;
+//import com.donateknowledge.mail.MailMail;
 import com.donateknowledge.service.IDonateKnowledgeService;
 
 @RestController
@@ -39,6 +40,8 @@ public class DonateKnowledgeController {
 
 	@Autowired
 	private IDonateKnowledgeService service;
+//	@Autowired
+//	private MailMail mail;
 
 	@RequestMapping(value = { "/newpost" }, method = RequestMethod.GET)
 	public ModelAndView getNewPost(
@@ -57,7 +60,7 @@ public class DonateKnowledgeController {
 		return mv;
 	}
 
-	@RequestMapping(value = {"/newpost"}, method = RequestMethod.POST)
+	@RequestMapping(value = { "/newpost" }, method = RequestMethod.POST)
 	public void submitNewPost(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
@@ -68,36 +71,30 @@ public class DonateKnowledgeController {
 
 		User user = service.getLoggedInUser(cookieValue, session, response);
 
-		/*ModelAndView mv = null;
-
-        if (user == null) {
-        	mv = new ModelAndView(LOGIN_PAGE);   // only logged in users can post to blog
-        }
-        else if (title.equals("") || post.equals("")) {
-            // redisplay page with errors
-            HashMap<String, String> root = new HashMap<String, String>();
-            root.put("errors", "post must contain a title and blog entry.");
-            root.put("subject", title);
-            root.put("username", username);
-            root.put("tags", tags);
-            root.put("body", post);
-            template.process(root, writer);
-        }
-        else {
-            // extract tags
-            ArrayList<String> tagsArray = extractTags(tags);
-
-            // substitute some <p> for the paragraph breaks
-            post = post.replaceAll("\\r?\\n", "<p>");
-
-            String permalink = blogPostDAO.addPost(title, post, tagsArray, username);
-
-            // now redirect to the blog permalink
-            response.redirect("/post/" + permalink);
-        }*/
+		/*
+		 * ModelAndView mv = null;
+		 * 
+		 * if (user == null) { mv = new ModelAndView(LOGIN_PAGE); // only logged
+		 * in users can post to blog } else if (title.equals("") ||
+		 * post.equals("")) { // redisplay page with errors HashMap<String,
+		 * String> root = new HashMap<String, String>(); root.put("errors",
+		 * "post must contain a title and blog entry."); root.put("subject",
+		 * title); root.put("username", username); root.put("tags", tags);
+		 * root.put("body", post); template.process(root, writer); } else { //
+		 * extract tags ArrayList<String> tagsArray = extractTags(tags);
+		 * 
+		 * // substitute some <p> for the paragraph breaks post =
+		 * post.replaceAll("\\r?\\n", "<p>");
+		 * 
+		 * String permalink = blogPostDAO.addPost(title, post, tagsArray,
+		 * username);
+		 * 
+		 * // now redirect to the blog permalink response.redirect("/post/" +
+		 * permalink); }
+		 */
 	}
 
-	@RequestMapping(value = {"/compare"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/compare" }, method = RequestMethod.GET)
 	public ModelAndView compare(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
 			HttpSession session, HttpServletResponse response) throws Exception {
@@ -124,7 +121,7 @@ public class DonateKnowledgeController {
 		return mv;
 	}
 
-	@RequestMapping(value = {"/uploader"}, method = RequestMethod.POST)
+	@RequestMapping(value = { "/uploader" }, method = RequestMethod.POST)
 	public ModelAndView submitUploader(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
@@ -138,7 +135,8 @@ public class DonateKnowledgeController {
 		String mrpPrice = StringEscapeUtils.escapeHtml4(request.getParameter("mrpPrice"));
 		String piecesInStock = StringEscapeUtils.escapeHtml4(request.getParameter("piecesInStock"));
 
-		System.out.println("testing productName:" + bookTitle + ", manufacturer:" + bookTitle + ", modelName:" + bookTitle);
+		System.out.println(
+				"testing productName:" + bookTitle + ", manufacturer:" + bookTitle + ", modelName:" + bookTitle);
 
 		Book book = new Book();
 		book.setAuthorName(authorName);
@@ -161,32 +159,35 @@ public class DonateKnowledgeController {
 		book.setProductCategory(ProductCategory.BOOK.getValue());
 		book.setPublisherName(publisherName);
 		book.setYear(Integer.valueOf(year));
-		book.setSecertCode(RandomStringUtils.randomAlphanumeric(8).toUpperCase());
-		
+		book.setSecretCode(RandomStringUtils.randomAlphanumeric(8).toUpperCase());
+
 		service.insertBook(book);
 		mv.addObject("phoneFinder", null);
 		return mv;
 	}
 
-	@RequestMapping(value = {"/confirmReceive"}, method = RequestMethod.POST)
+	@RequestMapping(value = { "/confirmReceive" }, method = RequestMethod.POST)
 	public ModelAndView submitReceivedBook(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 
 		String isbn = StringEscapeUtils.escapeHtml4(request.getParameter("bookSelect"));
 
-		Product book = service.fetchBookById(isbn);
+		Book book = (Book) service.fetchBookById(isbn);
 
-		ModelAndView mv = new ModelAndView("donateSuccess");
+		ModelAndView mv = new ModelAndView("receiveSuccess");
 		User user = service.getLoggedInUser(cookieValue, session, response);
 		if (user != null) {
 			mv.addObject(USER, user);
 		}
-		
-		
-		//service.insertBook(book);
+
+		// service.insertBook(book);
 		mv.addObject("phoneFinder", null);
-		mv.addObject("book",book);
+		mv.addObject("book", book);
+
+		book.getSecretCode();
+		
+//		mail.sendMail("ashishthomas177@gmail.com", "soni_rahul@live.com", book.getSecretCode(), book.getSecretCode());
 		return mv;
 	}
 
@@ -209,9 +210,6 @@ public class DonateKnowledgeController {
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 
-
-
-
 		ModelAndView mv = new ModelAndView("receive");
 		User user = service.getLoggedInUser(cookieValue, session, response);
 		if (user != null) {
@@ -219,29 +217,23 @@ public class DonateKnowledgeController {
 		}
 
 		List<Product> bookList = service.fetchAllBooks(user.getEmail());
-		
-		/*new ArrayList<Book>();
 
-		Book book = new Book();
-
-		book.setAuthorName("authorName");
-		book.setBookTitle("bookTitle");
-		book.setEdition("edition");
-		book.setInsertedBy("insertedBy");
-		book.setInsertedDate(new Date());
-		book.setIsbn("isbn");
-		book.setMrpPrice(new BigDecimal("10.0"));
-		book.setPiecesInStock(new BigInteger("10"));
-		book.setProductCategory("productCategory");
-		book.setProductImage("productImage");
-		book.setPublisherName("publisherName");
-		book.setYear(2016);
-		
-		bookList.add(book);
-		bookList.add(book);
-		bookList.add(book);
-		bookList.add(book);
-		bookList.add(book);*/
+		/*
+		 * new ArrayList<Book>();
+		 * 
+		 * Book book = new Book();
+		 * 
+		 * book.setAuthorName("authorName"); book.setBookTitle("bookTitle");
+		 * book.setEdition("edition"); book.setInsertedBy("insertedBy");
+		 * book.setInsertedDate(new Date()); book.setIsbn("isbn");
+		 * book.setMrpPrice(new BigDecimal("10.0")); book.setPiecesInStock(new
+		 * BigInteger("10")); book.setProductCategory("productCategory");
+		 * book.setProductImage("productImage");
+		 * book.setPublisherName("publisherName"); book.setYear(2016);
+		 * 
+		 * bookList.add(book); bookList.add(book); bookList.add(book);
+		 * bookList.add(book); bookList.add(book);
+		 */
 
 		mv.addObject("phoneFinder", null);
 		mv.addObject("bookList", bookList);
@@ -253,37 +245,35 @@ public class DonateKnowledgeController {
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 
-
-
-
 		ModelAndView mv = new ModelAndView("claimPoints");
 		User user = service.getLoggedInUser(cookieValue, session, response);
 		if (user != null) {
 			mv.addObject(USER, user);
 		}
 
-		List<Product> bookList = service.fetchAllBooksByInsertId(user.getEmail()); /*new ArrayList<Book>();
-
-		Book book = new Book();
-
-		book.setAuthorName("authorName");
-		book.setBookTitle("bookTitle");
-		book.setEdition("edition");
-		book.setInsertedBy("insertedBy");
-		book.setInsertedDate(new Date());
-		book.setIsbn("isbn");
-		book.setMrpPrice(new BigDecimal("10.0"));
-		book.setPiecesInStock(new BigInteger("10"));
-		book.setProductCategory("productCategory");
-		book.setProductImage("productImage");
-		book.setPublisherName("publisherName");
-		book.setYear(2016);
-		
-		bookList.add(book);
-		bookList.add(book);
-		bookList.add(book);
-		bookList.add(book);
-		bookList.add(book);*/
+		List<Product> bookList = service.fetchAllBooksByInsertId(user
+				.getEmail()); /*
+								 * new ArrayList<Book>();
+								 * 
+								 * Book book = new Book();
+								 * 
+								 * book.setAuthorName("authorName");
+								 * book.setBookTitle("bookTitle");
+								 * book.setEdition("edition");
+								 * book.setInsertedBy("insertedBy");
+								 * book.setInsertedDate(new Date());
+								 * book.setIsbn("isbn"); book.setMrpPrice(new
+								 * BigDecimal("10.0"));
+								 * book.setPiecesInStock(new BigInteger("10"));
+								 * book.setProductCategory("productCategory");
+								 * book.setProductImage("productImage");
+								 * book.setPublisherName("publisherName");
+								 * book.setYear(2016);
+								 * 
+								 * bookList.add(book); bookList.add(book);
+								 * bookList.add(book); bookList.add(book);
+								 * bookList.add(book);
+								 */
 
 		mv.addObject("phoneFinder", null);
 		mv.addObject("bookList", bookList);

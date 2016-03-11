@@ -16,7 +16,7 @@ public class Book extends Product {
     private String edition;
     private Integer year;
     private String genre;
-    private String secertCode;
+    private String secretCode;
     
     public String getBookTitle() {
 		return bookTitle;
@@ -62,11 +62,12 @@ public class Book extends Product {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	public String getSecertCode() {
-		return secertCode;
+	
+	public String getSecretCode() {
+		return secretCode;
 	}
-	public void setSecertCode(String secertCode) {
-		this.secertCode = secertCode;
+	public void setSecretCode(String secretCode) {
+		this.secretCode = secretCode;
 	}
 	@Override
 	public String toString() {
