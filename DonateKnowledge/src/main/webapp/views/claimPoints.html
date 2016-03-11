@@ -63,7 +63,8 @@ td.pz {
 						<td  align="center" class="col-sm-1"><strong>Publisher Name</strong></td>
 						<td  align="center" class="col-sm-1"><strong>Year</strong></td>
 						<td  align="center" class="col-sm-1"><strong>Points</strong></td>
-						<td  align="center" class="col-sm-1"><strong>Redeem Points</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Pass Code</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Redeem</strong></td>
 					</tr> 
 					<#if bookList??> 
 					<#list bookList as book>
@@ -78,14 +79,16 @@ td.pz {
 						<td align="center" class="col-sm-1">${book.publisherName}</td>
 						<td align="center" class="col-sm-1">${book.year}</td>
 						<td align="center" class="col-sm-1">Need this Field</td>
-						<td align="center" class="col-sm-1"><input type="text" name="RedeemPoints" value="RedeemPoints"></td>
+						<td align="center" class="col-sm-1"><input type="text" name="PassCode" value="PassCode"></td>
+						<td align="center" class="col-sm-1"><input type="submit" name="test"
+							id="test" class="pit btn-primary" value="redeem" /></td>
 					</tr>
 					</#list> 
 					</#if>
 					
 					<tr>
-						<td colspan="11" class="pz"><input type="submit" name=""
-							id="submit" id="receiver" class="pit btn-primary" value="submit" /></td>
+						<td colspan="12" class="pz"><input type="submit" name=""
+							id="receiver" class="pit btn-primary" value="submit" /></td>
 					</tr>
 				</tbody>
 			</table>
