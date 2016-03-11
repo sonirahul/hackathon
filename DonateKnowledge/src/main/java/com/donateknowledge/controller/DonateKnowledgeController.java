@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.donateknowledge.dto.product.ProductCategory;
 import com.donateknowledge.dto.product.book.Book;
 import com.donateknowledge.dto.user.User;
 import com.donateknowledge.service.IDonateKnowledgeService;
@@ -55,7 +56,7 @@ public class DonateKnowledgeController {
 		return mv;
 	}
 
-	@RequestMapping(value = { "/newpost" }, method = RequestMethod.POST)
+	@RequestMapping(value = {"/newpost"}, method = RequestMethod.POST)
 	public void submitNewPost(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
@@ -66,30 +67,36 @@ public class DonateKnowledgeController {
 
 		User user = service.getLoggedInUser(cookieValue, session, response);
 
-		/*
-		 * ModelAndView mv = null;
-		 * 
-		 * if (user == null) { mv = new ModelAndView(LOGIN_PAGE); // only logged
-		 * in users can post to blog } else if (title.equals("") ||
-		 * post.equals("")) { // redisplay page with errors HashMap<String,
-		 * String> root = new HashMap<String, String>(); root.put("errors",
-		 * "post must contain a title and blog entry."); root.put("subject",
-		 * title); root.put("username", username); root.put("tags", tags);
-		 * root.put("body", post); template.process(root, writer); } else { //
-		 * extract tags ArrayList<String> tagsArray = extractTags(tags);
-		 * 
-		 * // substitute some <p> for the paragraph breaks post =
-		 * post.replaceAll("\\r?\\n", "<p>");
-		 * 
-		 * String permalink = blogPostDAO.addPost(title, post, tagsArray,
-		 * username);
-		 * 
-		 * // now redirect to the blog permalink response.redirect("/post/" +
-		 * permalink); }
-		 */
+		/*ModelAndView mv = null;
+
+        if (user == null) {
+        	mv = new ModelAndView(LOGIN_PAGE);   // only logged in users can post to blog
+        }
+        else if (title.equals("") || post.equals("")) {
+            // redisplay page with errors
+            HashMap<String, String> root = new HashMap<String, String>();
+            root.put("errors", "post must contain a title and blog entry.");
+            root.put("subject", title);
+            root.put("username", username);
+            root.put("tags", tags);
+            root.put("body", post);
+            template.process(root, writer);
+        }
+        else {
+            // extract tags
+            ArrayList<String> tagsArray = extractTags(tags);
+
+            // substitute some <p> for the paragraph breaks
+            post = post.replaceAll("\\r?\\n", "<p>");
+
+            String permalink = blogPostDAO.addPost(title, post, tagsArray, username);
+
+            // now redirect to the blog permalink
+            response.redirect("/post/" + permalink);
+        }*/
 	}
 
-	@RequestMapping(value = { "/compare" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"/compare"}, method = RequestMethod.GET)
 	public ModelAndView compare(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
 			HttpSession session, HttpServletResponse response) throws Exception {
@@ -116,7 +123,7 @@ public class DonateKnowledgeController {
 		return mv;
 	}
 
-	@RequestMapping(value = { "/uploader" }, method = RequestMethod.POST)
+	@RequestMapping(value = {"/uploader"}, method = RequestMethod.POST)
 	public ModelAndView submitUploader(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
@@ -125,13 +132,40 @@ public class DonateKnowledgeController {
 		String post = StringEscapeUtils.escapeHtml4(request.getParameter("manufacturer"));
 		String tags = StringEscapeUtils.escapeHtml4(request.getParameter("modelName"));
 
-		System.out.println("testing productName:" + title + ", manufacturer:" + post + ", modelName:" + tags);
+		String bookTitle = StringEscapeUtils.escapeHtml4(request.getParameter("bookTitle"));
+		String authorName = StringEscapeUtils.escapeHtml4(request.getParameter("authorName"));
+		String publisherName = StringEscapeUtils.escapeHtml4(request.getParameter("publisherName"));
+		String isbn = StringEscapeUtils.escapeHtml4(request.getParameter("isbn"));
+		String year = StringEscapeUtils.escapeHtml4(request.getParameter("year"));
+		String edition = StringEscapeUtils.escapeHtml4(request.getParameter("edition"));
+		String mrpPrice = StringEscapeUtils.escapeHtml4(request.getParameter("mrpPrice"));
+		String piecesInStock = StringEscapeUtils.escapeHtml4(request.getParameter("piecesInStock"));
 
-		ModelAndView mv = new ModelAndView("uploader");
+		System.out.println("testing productName:" + bookTitle + ", manufacturer:" + bookTitle + ", modelName:" + bookTitle);
+
+		Book book = new Book();
+		book.setAuthorName(authorName);
+		book.setBookTitle(bookTitle);
+		book.setEdition(edition);
+		book.setGenre("");
+
+		ModelAndView mv = new ModelAndView("donateSuccess");
 		User user = service.getLoggedInUser(cookieValue, session, response);
 		if (user != null) {
 			mv.addObject(USER, user);
 		}
+		book.setInsertedBy(user.getEmail());
+		book.setInsertedDate(new Date());
+		book.setIsbn(isbn);
+		if (mrpPrice != null && "".equals(mrpPrice)) {
+			book.setMrpPrice(new BigDecimal(mrpPrice));
+		}
+		book.setPiecesInStock(new BigInteger(piecesInStock));
+		book.setProductCategory(ProductCategory.BOOK.getValue());
+		book.setPublisherName(publisherName);
+		book.setYear(Integer.valueOf(year));
+		
+		service.insertBook(book);
 		mv.addObject("phoneFinder", null);
 		return mv;
 	}
@@ -154,6 +188,9 @@ public class DonateKnowledgeController {
 	public ModelAndView receive(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
+
+
+
 
 		ModelAndView mv = new ModelAndView("receive");
 		User user = service.getLoggedInUser(cookieValue, session, response);

@@ -42,7 +42,7 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DonateKnowledgeServiceImpl.class);
 
-	@Autowired private IProductDAO cellPhoneDao;
+	@Autowired private IProductDAO bookDao;
 	@Autowired private ISessionDAO sessionDao;
 	@Autowired private IUserDAO userDao;
 
@@ -173,7 +173,7 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 
 	@Override
 	public Product fetchCellPhoneById(String productName) throws Exception {
-		return cellPhoneDao.fetchCellPhoneById(productName);
+		return bookDao.fetchCellPhoneById(productName);
 	}
 
 	@Override
@@ -219,7 +219,7 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 
 	@Override
 	public List<Product> fetchCellPhoneByTextIndex(String searchStr, int limit, boolean fetchImage) throws Exception {
-		return cellPhoneDao.fetchCellPhoneByTextIndex(searchStr, 0, limit, fetchImage);
+		return bookDao.fetchCellPhoneByTextIndex(searchStr, 0, limit, fetchImage);
 	}
 
 	@Override
@@ -227,14 +227,14 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 		String[] searchTokens = searchStr.split(" ");
 
 		if (searchTokens.length == 1) {
-			return cellPhoneDao.fetchCellPhoneByRegex(searchTokens, 0, limit, fetchImage);
+			return bookDao.fetchCellPhoneByRegex(searchTokens, 0, limit, fetchImage);
 		}
 		else {
 			String[] searchArr = new String[1];
 			searchArr[0] = searchStr.replaceAll(" ", "[\\\\\\\\s]");
-			Set<Product> phoneSet = new LinkedHashSet<>(cellPhoneDao.fetchCellPhoneByRegex(searchArr, 0, limit, fetchImage));
+			Set<Product> phoneSet = new LinkedHashSet<>(bookDao.fetchCellPhoneByRegex(searchArr, 0, limit, fetchImage));
 			if (phoneSet.size() < limit) {
-				phoneSet.addAll(cellPhoneDao.fetchCellPhoneByRegex(searchTokens, 0, limit - phoneSet.size(), fetchImage));
+				phoneSet.addAll(bookDao.fetchCellPhoneByRegex(searchTokens, 0, limit - phoneSet.size(), fetchImage));
 			}
 
 			List<Product> phoneList = new ArrayList<Product>(phoneSet);
@@ -244,7 +244,7 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 	}
 
 	@Override
-	public Set<Product> fetchCellPhone(String searchStr, int limit, boolean fetchImage) throws Exception {
+	public Set<Product> fetchProduct(String searchStr, int limit, boolean fetchImage) throws Exception {
 		Set<Product> phoneSet = new LinkedHashSet<>();
 		phoneSet.addAll(fetchCellPhoneByTextIndex(searchStr.toLowerCase(), limit, fetchImage));
 
@@ -255,6 +255,12 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 			}
 		}
 		return phoneSet;
+	}
+
+	@Override
+	public boolean insertBook(Product product) throws Exception {
+		bookDao.insertProduct(product);
+		return false;
 	}
 
 }

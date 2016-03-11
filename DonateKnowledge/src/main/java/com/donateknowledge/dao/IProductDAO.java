@@ -7,7 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface IProductDAO {
 
-	boolean insertCellPhone(Product cellPhone) throws JsonProcessingException;
+	boolean insertProduct(Product cellPhone) throws JsonProcessingException;
 
 	Product fetchCellPhoneById(String str) throws Exception;
 

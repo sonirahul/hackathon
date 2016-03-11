@@ -42,7 +42,6 @@ td.pz {
 	overflow: hidden
 }
 </style>
-jskdljflksdjflksjdf
 <div id="myForm" class="container">
 	<ol class="breadcrumb">
 		<li><a href="uploader">Donation</a></li>
@@ -57,115 +56,63 @@ jskdljflksdjflksjdf
 					<tr>
 						<td>Name of the Book</td>
 						<td colspan="2" class="pz"><input type="text"
-							name="productName" id="uploaderProductName" class="pit"
+							name="bookTitle" id="uploaderProductName" class="pit"
 							required="required"></td>
 					</tr>
 					<tr>
-						<td>Genres</td>
+						<td>Author Name</td>
+						<td colspan="2" class="pz"><input type="text"
+							name="authorName" id="uploaderModelName" class="pit" 
+							required="required"></td>
+					</tr>
+					<tr>
+						<td>Publisher Name</td>
+						<td colspan="2" class="pz"><input type="text"
+							name="publisherName" id="uploaderpublisherName" class="pit" 
+							required="required"></td>
+					</tr>
+					<tr>
+						<td>Genre</td>
 						<td colspan="2" class="pz"><select>
 								<option value="Science fiction">Science Fiction</option>
 						</select></td>
 					</tr>
+					
 					<tr>
-						<td>Author</td>
+						<td>ISBN</td>
 						<td colspan="2" class="pz"><input type="text"
-							name="modelName" id="uploaderModelName" class="pit"></td>
+							name="isbn" id="uploaderISBN" class="pit" 
+							required="required"></td>
 					</tr>
 					<tr>
-						<td>Date Of Submission</td>
-						<td colspan="2" class="pz"><input type="text"
-							name="productCategory" id="uploaderProductCategory" class="pit"></td>
-					</tr>
-					<tr>
-						<td>Product Image</td>
+						<td>Book Image</td>
 						<td colspan="2" class="pz"><input type="file"
 							name="productImage" id="uploaderProductImage" class="pit"></td>
 					</tr>
 					<tr>
-						<td>Release Date</td>
-						<td colspan="2" class="pz"><input type="date"
-							name="releaseDate" id="uploaderReleaseDate" class="calendar"></td>
-					</tr>
-					<tr>
-						<td>Available</td>
+						<td>Year</td>
 						<td colspan="2" class="pz"><input type="text"
-							name="available" id="uploaderAvailable" class="pit"></td>
+							name="year" id="uploaderReleaseDate" class="pit" ></td>
 					</tr>
 					<tr>
-						<td rowspan="8">Body</td>
-						<td>Color</td>
-						<td class="pz"><input type="text" name="color"
-							id="uploaderColor" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Dimension Unit</td>
-						<td class="pz"><input type="text" name="dimensionUnit"
-							id="uploaderDimensionUnit" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Height</td>
-						<td class="pz"><input type="text" name="height"
-							id="uploaderHeight" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Width</td>
-						<td class="pz"><input type="text" name="width"
-							id="uploaderWidth" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Length</td>
-						<td class="pz"><input type="text" name="length"
-							id="uploaderLength" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Materials</td>
-						<td class="pz"><input type="text" name="materials"
-							id="uploaderMaterials" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Weight</td>
-						<td class="pz"><input type="text" name="weight"
-							id="uploaderWeight" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Weight Unit</td>
-						<td class="pz"><input type="text" name="weightUnit"
-							id="uploaderWeightUnit" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>List Price</td>
+						<td>Edition</td>
 						<td colspan="2" class="pz"><input type="text"
-							name="listPrice" id="uploaderListPrice" class="pit"></td>
+							name="edition" id="uploaderEdition" class="pit"></td>
 					</tr>
 					<tr>
 						<td>Mrp Price</td>
 						<td colspan="2" class="pz"><input type="text" name="mrpPrice"
-							id="uploaderMrpPrice" class="pit"></td>
+							id="uploaderMrpPrice" class="pit" 
+							required="required"></td>
 					</tr>
 					<tr>
-						<td colspan="3"></td>
+						<td>No of Books</td>
+						<td colspan="2" class="pz"><input type="text" name="piecesInStock"
+							id="uploaderPiecesInStock" class="pit"></td>
 					</tr>
 					<tr>
-						<td colspan="3">PHONE SPECIFICATION</td>
-					</tr>
-					<tr>
-						<td rowspan="7">Battery</td>
-						<td>Capacity</td>
-						<td class="pz"><input type="text" name="capacity"
-							id="uploaderCapacity" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Music Play</td>
-						<td class="pz"><input type="text" name="musicPlay"
-							id="uploaderMusicPlay" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Removable</td>
-						<td class="pz">yyyyzz
-							<option value="1"></option>
-							<option value="false">False</option>
-							<option value="true">True</option> </select>
-						</td>
+						<td colspan="3" class="pz"><input type="submit" name=""
+							id="submit" id="uploader" class="pit btn-primary" value="submit" /></td>
 					</tr>
 				</tbody>
 			</table>
