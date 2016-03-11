@@ -15,7 +15,7 @@ public interface IDonateKnowledgeService {
 
 	User validateUser(User validateUser);
 
-	Product fetchCellPhoneById(String productName) throws Exception;
+	Product fetchBookById(String productName) throws Exception;
 
 	boolean insertUser(User validateUser) throws Exception;
 

@@ -86,7 +86,7 @@ td.pz {
 					<#if bookList??> 
 					<#list bookList as book>
 					<tr>
-						<td class="col-sm-1"><input type="checkbox" name="bookSelect" value="bookSelect"></td>	
+						<td class="col-sm-1"><input type="checkbox" name="bookSelect" value="${book.isbn}"></td>	
 						<td class="col-sm-1">${book.authorName}</td>
 						<td class="col-sm-1">${book.bookTitle}</td>
 						<td class="col-sm-1">${book.edition}</td>
@@ -103,7 +103,7 @@ td.pz {
 					</#if>
 					
 					<tr>
-						<td colspan="3" class="pz"><input type="submit" name=""
+						<td colspan="12" class="pz"><input type="submit" name=""
 							id="submit" id="receiver" class="pit btn-primary" value="submit" /></td>
 					</tr>
 				</tbody>

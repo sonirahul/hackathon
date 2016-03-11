@@ -9,7 +9,7 @@ public interface IProductDAO {
 
 	boolean insertProduct(Product cellPhone) throws JsonProcessingException;
 
-	Product fetchCellPhoneById(String str) throws Exception;
+	Product fetchBookById(String str) throws Exception;
 
 	List<Product> fetchCellPhoneByRegex(String[] searchArr, int skip, int limit, boolean fetchImage)
 			throws Exception;

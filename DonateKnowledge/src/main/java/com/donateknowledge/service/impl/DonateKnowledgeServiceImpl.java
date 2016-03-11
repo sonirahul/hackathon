@@ -172,8 +172,8 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 	}
 
 	@Override
-	public Product fetchCellPhoneById(String productName) throws Exception {
-		return bookDao.fetchCellPhoneById(productName);
+	public Product fetchBookById(String productName) throws Exception {
+		return bookDao.fetchBookById(productName);
 	}
 
 	@Override

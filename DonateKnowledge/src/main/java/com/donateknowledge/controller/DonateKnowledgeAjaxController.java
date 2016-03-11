@@ -62,7 +62,7 @@ public class DonateKnowledgeAjaxController {
 		
 		productName = productName.replaceAll("\"", "").replaceFirst("_", " ");
 		
-		Product phone = service.fetchCellPhoneById(productName);
+		Product phone = service.fetchBookById(productName);
 		
 		return phone;
 	}
@@ -75,7 +75,7 @@ public class DonateKnowledgeAjaxController {
 
 		productName = productName.replaceFirst("_", " ");
 
-		Product phone = service.fetchCellPhoneById(productName);
+		Product phone = service.fetchBookById(productName);
 		if (phone != null) {
 			mv = new ModelAndView(PRODUCT_PAGE);
 			mv.addObject(PHONE, phone);

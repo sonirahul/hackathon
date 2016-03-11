@@ -160,7 +160,7 @@ public class BookDAOImpl implements IProductDAO  {
 	}
 
 	@Override
-	public Book fetchCellPhoneById(String str) throws Exception {
+	public Book fetchBookById(String str) throws Exception {
 
 		try {
 			Document update = Document.parse("{\"$inc\" : {\"totalHitCount\":1}}");
