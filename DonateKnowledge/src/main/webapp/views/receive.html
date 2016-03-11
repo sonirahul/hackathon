@@ -53,119 +53,54 @@ td.pz {
 			action="${rc.getContextPath()}/uploader">
 			<table class="table table-striped table-bordered">
 				<tbody>
+
+					<!-- <tr>
+						<td style="font-weight: 900;width: 10%" class="pz">Tick</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Author Name</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Book Title</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Edition</td>
+						<td style="font-weight: 900;width: 10%" class="pz">InsertedBy</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Inserted Date</td>
+						<td style="font-weight: 900;width: 10%" class="pz">ISBN</td>
+						<td style="font-weight: 900;width: 10%" class="pz">MRP Price</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Pieces In Stock</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Product Image</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Publisher Name</td>
+						<td style="font-weight: 900;width: 5%" class="pz">Year</td>
+					</tr> -->
+					
 					<tr>
-						<td>Name of the Book</td>
-						<td colspan="2" class="pz"><input type="text"
-							name="productName" id="uploaderProductName" class="pit"
-							required="required"></td>
-					</tr>
+						<td  align="center" class="col-sm-1"><strong>Tick</strong></strong></td>
+						<td  align="center" class="col-sm-1"><strong>Author Name</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Book Title</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Edition</strong></td>
+						<td  align="center" class="col-sm-1"><strong>InsertedBy</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Inserted Date</strong></td>
+						<td  align="center" class="col-sm-1"><strong>ISBN</strong></td>
+						<td  align="center" class="col-sm-1"><strong>MRP Price</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Pieces In Stock</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Product Image</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Publisher Name</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Year</strong></td>
+					</tr> 
+					<#if bookList??> 
+					<#list bookList as book>
 					<tr>
-						<td>Genres</td>
-						<td colspan="2" class="pz"><select>
-								<option value="Science fiction">Science Fiction</option>
-						</select></td>
+						<td class="col-sm-1"><input type="checkbox" name="bookSelect" value="bookSelect"></td>	
+						<td class="col-sm-1">${book.authorName}</td>
+						<td class="col-sm-1">${book.bookTitle}</td>
+						<td class="col-sm-1">${book.edition}</td>
+						<td class="col-sm-1">${book.insertedBy}</td>
+						<td class="col-sm-1">${book.insertedDate?date}</td>
+						<td class="col-sm-1">${book.isbn}</td>
+						<td class="col-sm-1">${book.mrpPrice}</td>
+						<td class="col-sm-1">${book.piecesInStock}</td>
+						<td class="col-sm-1">${book.productImage}</td>
+						<td class="col-sm-1">${book.publisherName}</td>
+						<td class="col-sm-1">${book.year}</td>
 					</tr>
-					<tr>
-						<td>Author</td>
-						<td colspan="2" class="pz"><input type="text"
-							name="modelName" id="uploaderModelName" class="pit"></td>
-					</tr>
-					<tr>
-						<td>Date Of Submission</td>
-						<td colspan="2" class="pz"><input type="text"
-							name="productCategory" id="uploaderProductCategory" class="pit"></td>
-					</tr>
-					<tr>
-						<td>Product Image</td>
-						<td colspan="2" class="pz"><input type="file"
-							name="productImage" id="uploaderProductImage" class="pit"></td>
-					</tr>
-					<tr>
-						<td>Release Date</td>
-						<td colspan="2" class="pz"><input type="date"
-							name="releaseDate" id="uploaderReleaseDate" class="calendar"></td>
-					</tr>
-					<tr>
-						<td>Available</td>
-						<td colspan="2" class="pz"><input type="text"
-							name="available" id="uploaderAvailable" class="pit"></td>
-					</tr>
-					<tr>
-						<td rowspan="8">Body</td>
-						<td>Color</td>
-						<td class="pz"><input type="text" name="color"
-							id="uploaderColor" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Dimension Unit</td>
-						<td class="pz"><input type="text" name="dimensionUnit"
-							id="uploaderDimensionUnit" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Height</td>
-						<td class="pz"><input type="text" name="height"
-							id="uploaderHeight" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Width</td>
-						<td class="pz"><input type="text" name="width"
-							id="uploaderWidth" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Length</td>
-						<td class="pz"><input type="text" name="length"
-							id="uploaderLength" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Materials</td>
-						<td class="pz"><input type="text" name="materials"
-							id="uploaderMaterials" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Weight</td>
-						<td class="pz"><input type="text" name="weight"
-							id="uploaderWeight" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Weight Unit</td>
-						<td class="pz"><input type="text" name="weightUnit"
-							id="uploaderWeightUnit" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>List Price</td>
-						<td colspan="2" class="pz"><input type="text"
-							name="listPrice" id="uploaderListPrice" class="pit"></td>
-					</tr>
-					<tr>
-						<td>Mrp Price</td>
-						<td colspan="2" class="pz"><input type="text" name="mrpPrice"
-							id="uploaderMrpPrice" class="pit"></td>
-					</tr>
-					<tr>
-						<td colspan="3"></td>
-					</tr>
-					<tr>
-						<td colspan="3">PHONE SPECIFICATION</td>
-					</tr>
-					<tr>
-						<td rowspan="7">Battery</td>
-						<td>Capacity</td>
-						<td class="pz"><input type="text" name="capacity"
-							id="uploaderCapacity" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Music Play</td>
-						<td class="pz"><input type="text" name="musicPlay"
-							id="uploaderMusicPlay" class="pit1"></td>
-					</tr>
-					<tr>
-						<td>Removable</td>
-						<td class="pz">yyyyzz
-							<option value="1"></option>
-							<option value="false">False</option>
-							<option value="true">True</option> </select>
-						</td>
-					</tr>
+					</#list> 
+					</#if>
 				</tbody>
 			</table>
 		</form>
