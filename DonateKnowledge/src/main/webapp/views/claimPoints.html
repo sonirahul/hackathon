@@ -12,7 +12,7 @@
 
 table input.pit, table input.pit1, table select.pit1 {
 	width: 100%;
-	padding: 10px;
+	padding: 10px;"src/main/webapp/views/claimPoints.html"
 	border: 0;
 }
 
@@ -87,9 +87,12 @@ td.pz {
 						<td align="center" class="col-sm-1">Need this Field</td>
 						<td align="center" class="col-sm-1"><input type="text"
 							name="PassCode" value="PassCode"></td>
-						<td align="center" class="col-sm-1"><a
+						<td align="center" class="col-sm-1">
+						
+						<a
 							data-target="#loginModal1" data-toggle="modal" href="#" id="test"
-							class="pit btn-primary" value="${book.isbn}">submit</a></a></td>
+							class="pit btn-primary" value="${book.isbn}"><input type="submit" name=""
+							id="receiver" class="pit btn-primary" value="submit" /></a></td>
 						<div id="loginModal1" class="	modal fade" role="dialog">
 							<div class="modal-dialog modal-sm">
 								<div class="modal-content">
@@ -108,11 +111,6 @@ td.pz {
 						</div>
 					</tr>
 					</#list> </#if>
-
-					<tr>
-						<td colspan="12" class="pz"><input type="submit" name=""
-							id="receiver" class="pit btn-primary" value="submit" /></td>
-					</tr>
 				</tbody>
 			</table>
 		</form>
