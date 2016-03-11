@@ -45,4 +45,8 @@ public interface IDonateKnowledgeService {
 	List<Product> fetchCellPhoneByRegex(String searchStr, int limit, boolean fetchImage) throws Exception;
 	
 	boolean insertBook(Product product) throws Exception;
+
+	List<Product> fetchAllBooks(String str) throws Exception;
+	
+	List<Product> fetchAllBooksByInsertId(String str) throws Exception;
 }

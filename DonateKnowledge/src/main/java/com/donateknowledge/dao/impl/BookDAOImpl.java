@@ -97,7 +97,7 @@ public class BookDAOImpl implements IProductDAO  {
 				phoneList.add(DonateKnowledgeUtils.jsonToJava(DonateKnowledgeUtils.javaToJson(itr), Book.class));
 			}
 
-			
+
 
 			return phoneList;
 		} catch (JsonParseException e) {
@@ -174,6 +174,65 @@ public class BookDAOImpl implements IProductDAO  {
 			else {
 				return null;
 			}
+		} catch (JsonParseException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (JsonMappingException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (JsonProcessingException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (IOException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		}
+	}
+
+	@Override
+	public List<Product> fetchAllBooks() throws Exception {
+
+		List<Product> phoneList = null;
+		try {
+
+			Set<Document> cellPhoneList = null;
+
+			cellPhoneList = collection.find().into(new LinkedHashSet<Document>());
+
+			phoneList = new ArrayList<>();
+			for (Document itr: cellPhoneList) {
+				phoneList.add(DonateKnowledgeUtils.jsonToJava(DonateKnowledgeUtils.javaToJson(itr), Book.class));
+			}
+
+			return phoneList;
+		} catch (JsonParseException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (JsonMappingException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (JsonProcessingException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (IOException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		}
+	}
+
+	@Override
+	public List<Product> fetchAllBooksByInsertId(String str) throws Exception {
+
+		List<Product> phoneList = null;
+		try {
+			Set<Document> cellPhoneList = collection.find(eq("insertedBy", str)).into(new LinkedHashSet<Document>());;
+
+			phoneList = new ArrayList<>();
+			for (Document itr: cellPhoneList) {
+				phoneList.add(DonateKnowledgeUtils.jsonToJava(DonateKnowledgeUtils.javaToJson(itr), Book.class));
+			}
+
+			return phoneList;
 		} catch (JsonParseException e) {
 			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
 			throw e;
