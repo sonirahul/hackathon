@@ -153,4 +153,40 @@ public class CheapestGadgetController {
 		mv.addObject("phoneFinder", service.updateCache());
 		return mv;
 	}
+
+	@RequestMapping(value = {"/donate"}, method = RequestMethod.POST)
+	public ModelAndView donate(
+			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue, 
+			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
+
+		ModelAndView mv = new ModelAndView("uploader");
+		User user = service.getLoggedInUser(cookieValue, session, response);
+		if (user != null) {
+			mv.addObject(USER, user);
+		}
+		mv.addObject("phoneFinder", service.updateCache());
+		return mv;
+	}
+
+
+	@RequestMapping(value = {"/receive"}, method = RequestMethod.POST)
+	public ModelAndView receive(
+			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue, 
+			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
+
+
+        String title = StringEscapeUtils.escapeHtml4(request.getParameter("productName"));
+        String post = StringEscapeUtils.escapeHtml4(request.getParameter("manufacturer"));
+        String tags = StringEscapeUtils.escapeHtml4(request.getParameter("modelName"));
+        
+        System.out.println("testing productName:" + title + ", manufacturer:" + post + ", modelName:" + tags);
+
+		ModelAndView mv = new ModelAndView("uploader");
+		User user = service.getLoggedInUser(cookieValue, session, response);
+		if (user != null) {
+			mv.addObject(USER, user);
+		}
+		mv.addObject("phoneFinder", service.updateCache());
+		return mv;
+	}
 }
