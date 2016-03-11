@@ -6,12 +6,9 @@ import static com.donateknowledge.constant.ApplicationConstants.SESSION_COOKIE;
 import static com.donateknowledge.constant.ApplicationConstants.SESSION_COOKIE_DEFAULT;
 import static com.donateknowledge.constant.ApplicationConstants.USER;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +21,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.donateknowledge.dto.user.User;
-import com.donateknowledge.service.ICheapestGadgetService;
+import com.donateknowledge.service.IDonateKnowledgeService;
 
 @RestController
-public class CheapestGadgetInitialController {
+public class DonateKnowledgeInitialController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CheapestGadgetInitialController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DonateKnowledgeInitialController.class);
 
-	@Autowired private ICheapestGadgetService service;
+	@Autowired private IDonateKnowledgeService service;
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public ModelAndView index(
@@ -39,15 +36,8 @@ public class CheapestGadgetInitialController {
 			HttpSession session, HttpServletResponse response) throws Exception {
 
 		ModelAndView mv = new ModelAndView(INDEX_PAGE);
-		List<Document> posts = service.findByDateDescending();
-
-		for (Document itr : posts) {
-			String body = (String) itr.get("body");
-			body = body.substring(0, body.substring(0, 300).lastIndexOf(" "));
-			body = body + "... <a href=\"post/" + itr.get("permalink").toString() + "\">Read More</a>";
-			itr.put("body", body);
-		}
-        mv.addObject("myposts", posts);
+		
+        mv.addObject("myposts", null);
 		User user = service.getLoggedInUser(cookieValue, session, response);
 		if (user != null) {
 			mv.addObject(USER, user);
@@ -120,16 +110,8 @@ public class CheapestGadgetInitialController {
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue, 
 			@ModelAttribute("user") User user, HttpSession session, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView(INDEX_PAGE);
-		List<Document> posts = service.findByDateDescending();
 
-		for (Document itr : posts) {
-			String body = (String) itr.get("body");
-			body = body.substring(0, body.substring(0, 300).lastIndexOf(" "));
-			body = body + "... <a href=\"post/" + itr.get("permalink").toString() + "\">Read More</a>";
-			itr.put("body", body);
-		}
-
-        mv.addObject("myposts", posts);
+        mv.addObject("myposts", null);
 		if (user.getEmail() == null) {
 			user = service.getLoggedInUser(cookieValue, session, response);
 		}

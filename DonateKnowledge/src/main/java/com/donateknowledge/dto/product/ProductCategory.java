@@ -1,9 +1,7 @@
 package com.donateknowledge.dto.product;
 
 public enum ProductCategory implements EnumInterface {
-	MOBILE("Mobile"),
-	LANDWIRED("Land Wired"),
-	LANDWIRELESS("Land Wireless");
+	BOOK("Book");
 
 	private final String value;
 

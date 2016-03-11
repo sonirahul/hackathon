@@ -7,10 +7,10 @@ import static com.donateknowledge.constant.ApplicationConstants.REGISTERED_lOGGE
 import static com.donateknowledge.constant.ApplicationConstants.SESSION_COOKIE;
 import static com.donateknowledge.constant.ApplicationConstants.SESSION_COOKIE_DEFAULT;
 import static com.donateknowledge.constant.ApplicationConstants.USER;
-import static com.donateknowledge.utils.CheapestGadgetUtils.decrypt;
-import static com.donateknowledge.utils.CheapestGadgetUtils.encrypt;
-import static com.donateknowledge.utils.CheapestGadgetUtils.generateRandomSessionId;
-import static com.donateknowledge.utils.CheapestGadgetUtils.getDateTimeToday;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.decrypt;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.encrypt;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.generateRandomSessionId;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateTimeToday;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -25,31 +25,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
-import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.donateknowledge.dao.IBlogPostDAO;
-import com.donateknowledge.dao.ICellPhoneDAO;
+import com.donateknowledge.dao.IProductDAO;
 import com.donateknowledge.dao.ISessionDAO;
 import com.donateknowledge.dao.IUserDAO;
-import com.donateknowledge.dto.compare.impl.CompareProductByPopularity;
-import com.donateknowledge.dto.product.phone.Phone;
-import com.donateknowledge.dto.product.phone.PhoneFinder;
+import com.donateknowledge.dto.product.Product;
 import com.donateknowledge.dto.user.User;
-import com.donateknowledge.service.ICheapestGadgetService;
+import com.donateknowledge.service.IDonateKnowledgeService;
 
 @Service
-public class CheapestGadgetServiceImpl implements ICheapestGadgetService {
+public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CheapestGadgetServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DonateKnowledgeServiceImpl.class);
 
-	@Autowired private ICellPhoneDAO cellPhoneDao;
+	@Autowired private IProductDAO cellPhoneDao;
 	@Autowired private ISessionDAO sessionDao;
 	@Autowired private IUserDAO userDao;
-	@Autowired private IBlogPostDAO postDao;
 
 	@Resource(name = "cache") private Map<String, Object> cache;
 
@@ -177,7 +172,7 @@ public class CheapestGadgetServiceImpl implements ICheapestGadgetService {
 	}
 
 	@Override
-	public Phone fetchCellPhoneById(String productName) throws Exception {
+	public Product fetchCellPhoneById(String productName) throws Exception {
 		return cellPhoneDao.fetchCellPhoneById(productName);
 	}
 
@@ -223,34 +218,34 @@ public class CheapestGadgetServiceImpl implements ICheapestGadgetService {
 	}
 
 	@Override
-	public List<Phone> fetchCellPhoneByTextIndex(String searchStr, int limit, boolean fetchImage) throws Exception {
-		return cellPhoneDao.fetchCellPhoneByTextIndex(searchStr, 0, limit, fetchImage, null);
+	public List<Product> fetchCellPhoneByTextIndex(String searchStr, int limit, boolean fetchImage) throws Exception {
+		return cellPhoneDao.fetchCellPhoneByTextIndex(searchStr, 0, limit, fetchImage);
 	}
 
 	@Override
-	public List<Phone> fetchCellPhoneByRegex(String searchStr, int limit, boolean fetchImage) throws Exception {
+	public List<Product> fetchCellPhoneByRegex(String searchStr, int limit, boolean fetchImage) throws Exception {
 		String[] searchTokens = searchStr.split(" ");
 
 		if (searchTokens.length == 1) {
-			return cellPhoneDao.fetchCellPhoneByRegex(searchTokens, 0, limit, fetchImage, null);
+			return cellPhoneDao.fetchCellPhoneByRegex(searchTokens, 0, limit, fetchImage);
 		}
 		else {
 			String[] searchArr = new String[1];
 			searchArr[0] = searchStr.replaceAll(" ", "[\\\\\\\\s]");
-			Set<Phone> phoneSet = new LinkedHashSet<>(cellPhoneDao.fetchCellPhoneByRegex(searchArr, 0, limit, fetchImage, null));
+			Set<Product> phoneSet = new LinkedHashSet<>(cellPhoneDao.fetchCellPhoneByRegex(searchArr, 0, limit, fetchImage));
 			if (phoneSet.size() < limit) {
-				phoneSet.addAll(cellPhoneDao.fetchCellPhoneByRegex(searchTokens, 0, limit - phoneSet.size(), fetchImage, new CompareProductByPopularity()));
+				phoneSet.addAll(cellPhoneDao.fetchCellPhoneByRegex(searchTokens, 0, limit - phoneSet.size(), fetchImage));
 			}
 
-			List<Phone> phoneList = new ArrayList<Phone>(phoneSet);
+			List<Product> phoneList = new ArrayList<Product>(phoneSet);
 			return phoneList;
 		}
 
 	}
 
 	@Override
-	public Set<Phone> fetchCellPhone(String searchStr, int limit, boolean fetchImage) throws Exception {
-		Set<Phone> phoneSet = new LinkedHashSet<>();
+	public Set<Product> fetchCellPhone(String searchStr, int limit, boolean fetchImage) throws Exception {
+		Set<Product> phoneSet = new LinkedHashSet<>();
 		phoneSet.addAll(fetchCellPhoneByTextIndex(searchStr.toLowerCase(), limit, fetchImage));
 
 		if (phoneSet.size() < limit) {
@@ -260,21 +255,6 @@ public class CheapestGadgetServiceImpl implements ICheapestGadgetService {
 			}
 		}
 		return phoneSet;
-	}
-
-	@Override
-	public PhoneFinder updateCache() throws Exception {
-		return cellPhoneDao.updateCache();
-	}
-
-	@Override
-	public List<Document> findByDateDescending() {
-		return postDao.findByDateDescending(10);
-	}
-	
-	@Override
-	public Document findByPermalink(String permalink) {
-		return postDao.findByPermalink(permalink);
 	}
 
 }

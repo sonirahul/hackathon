@@ -1,4 +1,5 @@
 package com.donateknowledge.utils;
+/*package com.donateknowledge.utils;
 
 import static com.donateknowledge.utils.CheapestGadgetUtils.getDateNDaysFromToday;
 
@@ -25,14 +26,14 @@ import com.donateknowledge.analytics.dao.impl.HitsTrackerDAOImpl;
 import com.donateknowledge.analytics.dto.Analytics;
 import com.donateknowledge.analytics.dto.Keys;
 import com.donateknowledge.configurator.SpringConfigurator;
-import com.donateknowledge.dao.ICellPhoneDAO;
+import com.donateknowledge.dao.IProductDAO;
 import com.donateknowledge.dao.IProductImageDAO;
 import com.donateknowledge.dao.IUserDAO;
-import com.donateknowledge.dao.impl.CellPhoneDAOImpl;
+import com.donateknowledge.dao.impl.BookDAOImpl;
 import com.donateknowledge.dao.impl.ProductImageDAOImpl;
 import com.donateknowledge.dao.impl.UserDAOImpl;
 import com.donateknowledge.dto.product.ProductImage;
-import com.donateknowledge.dto.product.phone.Phone;
+import com.donateknowledge.dto.product.book.Phone;
 import com.donateknowledge.dto.user.User;
 import com.donateknowledge.dto.user.UserRole;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -76,7 +77,7 @@ public class CheapestGadgetTester {
 		
 		
 		
-		ICellPhoneDAO cellDao = context.getBean(CellPhoneDAOImpl.class);
+		IProductDAO cellDao = context.getBean(BookDAOImpl.class);
 		Phone phone  = CheapestGadgetHardCodeHelper.getSampleCellPhone();
 		phone.setProductImage(base64Encoded);
 		
@@ -197,7 +198,7 @@ public class CheapestGadgetTester {
 	}
 
 	private static void testFetchCellPhoneById (ApplicationContext context) throws Exception {
-		ICellPhoneDAO cellDao = context.getBean(CellPhoneDAOImpl.class);
+		IProductDAO cellDao = context.getBean(BookDAOImpl.class);
 		Phone phoneFromDB = cellDao.fetchCellPhoneById("samsung 0");
 		System.out.println(phoneFromDB.getModels().get(0).getSimSlotCount());
 		System.out.println(CheapestGadgetUtils.javaToJsonPretty(phoneFromDB));
@@ -205,7 +206,7 @@ public class CheapestGadgetTester {
 
 	private static void testInsertCellPhone(ApplicationContext context) throws JsonProcessingException {
 
-		ICellPhoneDAO cellDao = context.getBean(CellPhoneDAOImpl.class);
+		IProductDAO cellDao = context.getBean(BookDAOImpl.class);
 		Phone phone  = CheapestGadgetHardCodeHelper.getSampleCellPhone();
 
 		String[] manufacturer = "samsung,sony,apple,lg,motorola,htc,lava,micromax,oneplus,oppo,nokia,xolo,carbon".split(",");
@@ -220,3 +221,4 @@ public class CheapestGadgetTester {
 		}
 	}
 }
+*/

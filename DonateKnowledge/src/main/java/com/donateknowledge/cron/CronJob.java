@@ -1,7 +1,7 @@
 package com.donateknowledge.cron;
 
-import static com.donateknowledge.utils.CheapestGadgetUtils.getDateTimeToday;
-import static com.donateknowledge.utils.CheapestGadgetUtils.getDateToday;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateTimeToday;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateToday;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

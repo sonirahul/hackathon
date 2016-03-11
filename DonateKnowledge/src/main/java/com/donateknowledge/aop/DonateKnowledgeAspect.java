@@ -20,15 +20,15 @@ import com.donateknowledge.analytics.dto.Keys;
 
 @Aspect
 @Component
-public class CheapestGadgetAspect {
+public class DonateKnowledgeAspect {
 
 	/*@Pointcut("within(com.donateknowledge.controller.*) || within(com.donateknowledge.dao.impl.*)")
 	public void allMethodsPointcut(){}*/
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CheapestGadgetAspect.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DonateKnowledgeAspect.class);
 	@Autowired Analytics keyWords;
 
-	@Pointcut("execution(* com.donateknowledge.controller.CheapestGadgetController.*(..))")
+	@Pointcut("execution(* com.donateknowledge.controller.DonateKnowledgeController.*(..))")
 	public void allControllers(){}
 
 
@@ -46,14 +46,14 @@ public class CheapestGadgetAspect {
 
 
 
-	@Pointcut("execution(* com.donateknowledge.dao.ICellPhoneDAO.*(..))")
+	/*@Pointcut("execution(* com.donateknowledge.dao.ICellPhoneDAO.*(..))")
 	public void allCellPhoneDAOPointCut(){}
 
 	@Pointcut("execution(* com.donateknowledge.dao.ICellPhoneDAO.fetchCellPhoneById(..))")
 	public void fetchCellPhoneById(){}
 
 	@Pointcut("allCellPhoneDAOPointCut() && !fetchCellPhoneById()")
-	public void allCellPhoneDAOButFetchCellPhoneById(){}
+	public void allCellPhoneDAOButFetchCellPhoneById(){}*/
 
 
 
@@ -70,7 +70,7 @@ public class CheapestGadgetAspect {
 
 
 
-	@Pointcut("execution(* com.donateknowledge.service.ICheapestGadgetService.getLoggedInUser(..))")
+	@Pointcut("execution(* com.donateknowledge.service.IDonateKnowledgeService.getLoggedInUser(..))")
 	public void newUserPointCut(){}
 
 
@@ -83,7 +83,7 @@ public class CheapestGadgetAspect {
 
 
 
-	@Around("fetchCellPhoneById()")
+	/*@Around("fetchCellPhoneById()")
 	public Object fetchCellPhoneByIdAroundAdvice(ProceedingJoinPoint proceedingJoinPoint) {
 		Object value = logMethodExecution(proceedingJoinPoint);
 
@@ -91,7 +91,7 @@ public class CheapestGadgetAspect {
 			keyWords.getKeyWords().add(new Keys((String) itr, value == null ? false : true));
 		}
 		return value;
-	}
+	}*/
 
 
 

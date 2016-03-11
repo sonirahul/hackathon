@@ -11,42 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.donateknowledge.dto.user.User;
-import com.donateknowledge.service.ICheapestGadgetService;
+import com.donateknowledge.service.IDonateKnowledgeService;
 
 @RestController
-public class CheapestGadgetController {
+public class DonateKnowledgeController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CheapestGadgetController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DonateKnowledgeController.class);
 
-	@Autowired private ICheapestGadgetService service;
-
-	@RequestMapping(value = {"/post/{permalink}"}, method = RequestMethod.GET)
-	public ModelAndView viewPost(@PathVariable String permalink, 
-			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue, 
-			HttpSession session, HttpServletResponse response) throws Exception {
-
-		ModelAndView mv = new ModelAndView("blogPosts");
-		Document post = service.findByPermalink(permalink);
-
-		mv.addObject("post", post);
-		User user = service.getLoggedInUser(cookieValue, session, response);
-		if (user != null) {
-			mv.addObject(USER, user);
-		}
-		return mv;
-	}
+	@Autowired private IDonateKnowledgeService service;
 	
 	@RequestMapping(value = {"/newpost"}, method = RequestMethod.GET)
 	public ModelAndView getNewPost(
@@ -129,7 +111,7 @@ public class CheapestGadgetController {
 		if (user != null) {
 			mv.addObject(USER, user);
 		}
-		mv.addObject("phoneFinder", service.updateCache());
+		mv.addObject("phoneFinder", null);
 		return mv;
 	}
 	
@@ -150,7 +132,7 @@ public class CheapestGadgetController {
 		if (user != null) {
 			mv.addObject(USER, user);
 		}
-		mv.addObject("phoneFinder", service.updateCache());
+		mv.addObject("phoneFinder", null);
 		return mv;
 	}
 
@@ -164,7 +146,7 @@ public class CheapestGadgetController {
 		if (user != null) {
 			mv.addObject(USER, user);
 		}
-		mv.addObject("phoneFinder", service.updateCache());
+		mv.addObject("phoneFinder", null);
 		return mv;
 	}
 
@@ -182,7 +164,7 @@ public class CheapestGadgetController {
 		if (user != null) {
 			mv.addObject(USER, user);
 		}
-		mv.addObject("phoneFinder", service.updateCache());
+		mv.addObject("phoneFinder", null);
 		return mv;
 	}
 }

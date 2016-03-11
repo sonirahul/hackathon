@@ -3,7 +3,7 @@ package com.donateknowledge.dao.impl;
 import static com.donateknowledge.constant.ApplicationConstants.EMAIL;
 import static com.donateknowledge.constant.ApplicationConstants.MONGODB_COLLECTION_SESSIONS;
 import static com.donateknowledge.constant.ApplicationConstants.MONGODB_FIELD_ID;
-import static com.donateknowledge.utils.CheapestGadgetUtils.getDateTimeToday;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateTimeToday;
 import static com.mongodb.client.model.Filters.eq;
 
 import org.bson.Document;

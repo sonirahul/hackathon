@@ -3,7 +3,7 @@ package com.donateknowledge.analytics.dto;
 import java.math.BigInteger;
 import java.util.Date;
 
-import com.donateknowledge.utils.CheapestGadgetUtils;
+import com.donateknowledge.utils.DonateKnowledgeUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -20,7 +20,7 @@ public class User {
 	}
 
 	public void resetUser() {
-		this.date = CheapestGadgetUtils.getDateTimeToday();
+		this.date = DonateKnowledgeUtils.getDateTimeToday();
 		this.existingUserCounts = BigInteger.ZERO;
 		this.newUserLogin = BigInteger.ZERO;
 	}

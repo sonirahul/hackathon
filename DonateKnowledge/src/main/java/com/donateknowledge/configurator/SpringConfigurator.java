@@ -7,8 +7,8 @@ import static com.donateknowledge.constant.ApplicationConstants.NOT_REGISTERED;
 import static com.donateknowledge.constant.ApplicationConstants.REGISTERED_LOGGED_IN;
 import static com.donateknowledge.constant.ApplicationConstants.REGISTERED_lOGGED_OFF;
 import static com.donateknowledge.constant.ApplicationConstants.VIEWS_LOC;
-import static com.donateknowledge.utils.CheapestGadgetUtils.getDateToday;
-import static com.donateknowledge.utils.CheapestGadgetUtils.makePasswordHash;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateToday;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.makePasswordHash;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +25,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 import com.donateknowledge.analytics.dto.Analytics;
 import com.donateknowledge.analytics.dto.User;
-import com.donateknowledge.utils.CheapestGadgetUtils;
+import com.donateknowledge.utils.DonateKnowledgeUtils;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
@@ -67,7 +67,7 @@ public class SpringConfigurator extends WebMvcConfigurerAdapter {
 	public Analytics keyWords() {
 		Analytics keyWords = new Analytics();
 		keyWords.setDate(getDateToday());
-		keyWords.getUser().add(new User(CheapestGadgetUtils.getDateTimeToday()));
+		keyWords.getUser().add(new User(DonateKnowledgeUtils.getDateTimeToday()));
 		return keyWords;
 	}
 

@@ -2,7 +2,7 @@ package com.donateknowledge.configurator;
 
 import static com.donateknowledge.constant.ApplicationConstants.CONFIG_FILE_PATH;
 import static com.donateknowledge.constant.ApplicationConstants.SESSION_MAX_INACTIVE_INTERVAL;
-import static com.donateknowledge.utils.CheapestGadgetUtils.getDateTimeToday;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateTimeToday;
 
 import java.io.IOException;
 import java.io.InputStream;

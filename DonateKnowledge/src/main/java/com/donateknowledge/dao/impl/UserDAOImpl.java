@@ -4,11 +4,11 @@ import static com.donateknowledge.constant.ApplicationConstants.ENCRYPTION_SALT;
 import static com.donateknowledge.constant.ApplicationConstants.MONGODB_COLLECTION_USERS;
 import static com.donateknowledge.constant.ApplicationConstants.MONGODB_COLLECTION_USERS_INDEX;
 import static com.donateknowledge.constant.ApplicationConstants.MONGODB_FIELD_ID;
-import static com.donateknowledge.utils.CheapestGadgetUtils.generateCustomErrorMessage;
-import static com.donateknowledge.utils.CheapestGadgetUtils.getDateTimeToday;
-import static com.donateknowledge.utils.CheapestGadgetUtils.javaToJson;
-import static com.donateknowledge.utils.CheapestGadgetUtils.jsonToJava;
-import static com.donateknowledge.utils.CheapestGadgetUtils.makePasswordHash;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.generateCustomErrorMessage;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateTimeToday;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.javaToJson;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.jsonToJava;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.makePasswordHash;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.io.IOException;

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.donateknowledge.configurator.ApplicationConfigurator;
 import com.donateknowledge.dao.IProductImageDAO;
 import com.donateknowledge.dto.product.ProductImage;
-import com.donateknowledge.utils.CheapestGadgetUtils;
+import com.donateknowledge.utils.DonateKnowledgeUtils;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -39,7 +39,7 @@ public class ProductImageDAOImpl implements IProductImageDAO {
 	@Override
 	public boolean insertProductImage(ProductImage image) throws Exception {
 		try {
-			String jsonInString = CheapestGadgetUtils.javaToJson(image);
+			String jsonInString = DonateKnowledgeUtils.javaToJson(image);
 			Document dbObject = Document.parse(jsonInString);
 			collection.insertOne(dbObject);
 			return true;
@@ -64,8 +64,8 @@ public class ProductImageDAOImpl implements IProductImageDAO {
 				List<Document> productImagesList = collection.find(Document.parse("{\"_id\" : \"" + productId + "\"}"))
 						.into(new ArrayList<Document>());
 
-				return CheapestGadgetUtils.jsonToJava(
-						CheapestGadgetUtils.javaToJson(productImagesList.get(0)), ProductImage.class);
+				return DonateKnowledgeUtils.jsonToJava(
+						DonateKnowledgeUtils.javaToJson(productImagesList.get(0)), ProductImage.class);
 			} catch (JsonParseException e) {
 				LOGGER.error("Exception occurred: " + e.getMessage());
 				throw e;

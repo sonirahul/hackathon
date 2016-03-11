@@ -1,9 +1,9 @@
 package com.donateknowledge.analytics.dao.impl;
 
 import static com.donateknowledge.constant.ApplicationConstants.MONGODB_COLLECTION_ANALYTICS_HITS;
-import static com.donateknowledge.utils.CheapestGadgetUtils.getDateNDaysFromToday;
-import static com.donateknowledge.utils.CheapestGadgetUtils.getDateToday;
-import static com.donateknowledge.utils.CheapestGadgetUtils.javaToJson;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateNDaysFromToday;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateToday;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.javaToJson;
 
 import java.util.ArrayList;
 import java.util.List;

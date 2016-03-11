@@ -44,9 +44,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class CheapestGadgetUtils {
+public class DonateKnowledgeUtils {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CheapestGadgetUtils.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DonateKnowledgeUtils.class);
 
 	private static ObjectMapper mapper = new ObjectMapper();
 	private static SimpleDateFormat formatter = new SimpleDateFormat(DD_MMM_YYYY);

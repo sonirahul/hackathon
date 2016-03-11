@@ -28,16 +28,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.donateknowledge.dto.product.phone.Phone;
+import com.donateknowledge.dto.product.Product;
 import com.donateknowledge.dto.user.User;
-import com.donateknowledge.service.ICheapestGadgetService;
+import com.donateknowledge.service.IDonateKnowledgeService;
 
 @RestController
-public class CheapestGadgetAjaxController {
+public class DonateKnowledgeAjaxController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CheapestGadgetAjaxController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DonateKnowledgeAjaxController.class);
 
-	@Autowired private ICheapestGadgetService service;
+	@Autowired private IDonateKnowledgeService service;
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView search(String query, 
@@ -58,11 +58,11 @@ public class CheapestGadgetAjaxController {
 	}
 	
 	@RequestMapping(value = "/addeditproduct", method = RequestMethod.POST) 
-	public Phone addEditProduct(@RequestBody String productName) throws Exception {
+	public Product addEditProduct(@RequestBody String productName) throws Exception {
 		
 		productName = productName.replaceAll("\"", "").replaceFirst("_", " ");
 		
-		Phone phone = service.fetchCellPhoneById(productName);
+		Product phone = service.fetchCellPhoneById(productName);
 		
 		return phone;
 	}
@@ -75,14 +75,14 @@ public class CheapestGadgetAjaxController {
 
 		productName = productName.replaceFirst("_", " ");
 
-		Phone phone = service.fetchCellPhoneById(productName);
+		Product phone = service.fetchCellPhoneById(productName);
 		if (phone != null) {
 			mv = new ModelAndView(PRODUCT_PAGE);
 			mv.addObject(PHONE, phone);
 		}
 		else {
 			mv = new ModelAndView(SEARCH_PAGE);
-			Set<Phone> phoneList = service.fetchCellPhone(productName, 20, true);
+			Set<Product> phoneList = service.fetchCellPhone(productName, 20, true);
 			mv.addObject(PHONE_LIST, phoneList);
 		}
 
@@ -99,9 +99,9 @@ public class CheapestGadgetAjaxController {
 		Set<Tag> result = new LinkedHashSet<Tag>();
 
 		int limit = 10; 
-		Set<Phone> phoneSet = service.fetchCellPhone(tagName, limit, false);
+		Set<Product> phoneSet = service.fetchCellPhone(tagName, limit, false);
 		int i = 0;
-		for (Phone itr : phoneSet) {
+		for (Product itr : phoneSet) {
 			result.add(new Tag(i++, itr.getProductId()));
 		}
 		return result;
@@ -117,7 +117,7 @@ public class CheapestGadgetAjaxController {
 		if (user != null) {
 			mv.addObject(USER, user);
 		}
-		mv.addObject("phoneFinder", service.updateCache());
+		mv.addObject("phoneFinder", null);
 		return mv;
 	}
 }

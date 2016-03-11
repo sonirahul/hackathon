@@ -2,8 +2,8 @@ package com.donateknowledge.analytics.dao.impl;
 
 import static com.donateknowledge.constant.ApplicationConstants.MONGODB_COLLECTION_ANALYTICS_KEYWORDS;
 import static com.donateknowledge.constant.ApplicationConstants.MONTH_AGO;
-import static com.donateknowledge.utils.CheapestGadgetUtils.getDateNDaysFromToday;
-import static com.donateknowledge.utils.CheapestGadgetUtils.javaToJson;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateNDaysFromToday;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.javaToJson;
 import static com.mongodb.client.model.Filters.eq;
 
 import org.bson.Document;

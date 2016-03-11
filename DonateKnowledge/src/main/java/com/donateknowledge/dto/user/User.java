@@ -1,7 +1,7 @@
 package com.donateknowledge.dto.user;
 
-import static com.donateknowledge.utils.CheapestGadgetUtils.getDateTimeToday;
-import static com.donateknowledge.utils.CheapestGadgetUtils.getEnumMappedList;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateTimeToday;
+import static com.donateknowledge.utils.DonateKnowledgeUtils.getEnumMappedList;
 import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
@@ -13,14 +13,15 @@ import org.springframework.util.CollectionUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true, 
 value={"firstName","middleName","lastName"})
 @JsonInclude(Include.NON_NULL)
 public class User {
 
+	private Address address;
 	@JsonProperty("_id")
 	private String email;
 	private String firstName;
@@ -40,6 +41,12 @@ public class User {
 	private Date registeredDate;
 	private List<String> userRole;
 
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 	public String getEmail() {
 		return email;
 	}
