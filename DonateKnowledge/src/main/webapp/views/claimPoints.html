@@ -1,0 +1,113 @@
+<#include "header.html">
+<style>
+#mainSel a {
+	display: block;
+}
+
+#mainSel {
+	width: 700px;
+	text-align: center;
+	font-size: 48px;
+}
+
+table input.pit, table input.pit1, table select.pit1 {
+	width: 100%;
+	padding: 10px;
+	border: 0;
+}
+
+.calendar {
+	width: initial;
+	padding: 10px;
+	border: 0
+}
+
+.changed:after {
+	content: "";
+	position: absolute;
+	right: -8px;
+	top: -3px;
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid #f00;
+	-ms-transform: rotate(225deg);
+	-webkit-transform: rotate(225deg);
+	transform: rotate(225deg);
+}
+
+td.pz {
+	position: relative;
+	overflow: hidden
+}
+</style>
+<div id="myForm" class="container">
+	<ol class="breadcrumb">
+		<li><a href="uploader">Receiver</a></li>
+		<li class="active">Book</li>
+	</ol>
+	<div class="panel panel-default">
+		<div class="panel-heading">Book</div>
+		<form id="uploadForm" method="post"
+			action="${rc.getContextPath()}/confirmReceive">
+			<table class="table table-striped table-bordered">
+				<tbody>
+
+					<!-- <tr>
+						<td style="font-weight: 900;width: 10%" class="pz">Tick</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Author Name</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Book Title</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Edition</td>
+						<td style="font-weight: 900;width: 10%" class="pz">InsertedBy</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Inserted Date</td>
+						<td style="font-weight: 900;width: 10%" class="pz">ISBN</td>
+						<td style="font-weight: 900;width: 10%" class="pz">MRP Price</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Pieces In Stock</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Product Image</td>
+						<td style="font-weight: 900;width: 10%" class="pz">Publisher Name</td>
+						<td style="font-weight: 900;width: 5%" class="pz">Year</td>
+					</tr> -->
+					
+					<tr>
+						<td  align="center" class="col-sm-1"><strong>Author Name</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Book Title</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Edition</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Inserted Date</strong></td>
+						<td  align="center" class="col-sm-1"><strong>ISBN</strong></td>
+						<td  align="center" class="col-sm-1"><strong>MRP Price</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Books Donated</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Publisher Name</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Year</strong></td>
+						<td  align="center" class="col-sm-1"><strong>Eligible Points</strong></td>
+					</tr> 
+					<#if bookList??> 
+					<#list bookList as book>
+					<tr>
+						<td class="col-sm-1"><input type="checkbox" name="bookSelect" value="bookSelect"></td>	
+						<td class="col-sm-1">${book.authorName}</td>
+						<td class="col-sm-1">${book.bookTitle}</td>
+						<td class="col-sm-1">${book.edition}</td>
+						<td class="col-sm-1">${book.insertedBy}</td>
+						<td class="col-sm-1">${book.insertedDate?date}</td>
+						<td class="col-sm-1">${book.isbn}</td>
+						<td class="col-sm-1">${book.mrpPrice}</td>
+						<td class="col-sm-1">${book.piecesInStock}</td>
+						<td class="col-sm-1">${book.productImage}</td>
+						<td class="col-sm-1">${book.publisherName}</td>
+						<td class="col-sm-1">${book.year}</td>
+					</tr>
+					</#list> 
+					</#if>
+					
+					<tr>
+						<td colspan="3" class="pz"><input type="submit" name=""
+							id="submit" id="receiver" class="pit btn-primary" value="submit" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+</div>
+
+<#include "footer.html">
