@@ -263,4 +263,24 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 		return false;
 	}
 
+	@Override
+	public List<Product> fetchAllBooks(String str) throws Exception {
+		// TODO Auto-generated method stub
+		List<Product> bookList = bookDao.fetchAllBooks();
+		if (bookList != null) {
+			for (int i=0; i<bookList.size(); i++) {
+				if(bookList.get(i).getInsertedBy().equalsIgnoreCase(str)) {
+					bookList.remove(i);
+				}
+			}
+		}
+		return bookList;
+	}
+
+	@Override
+	public List<Product> fetchAllBooksByInsertId(String str) throws Exception {
+		// TODO Auto-generated method stub
+		return bookDao.fetchAllBooksByInsertId(str);
+	}
+
 }

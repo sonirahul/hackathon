@@ -8,7 +8,6 @@ import static com.donateknowledge.constant.ApplicationConstants.USER;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -129,10 +129,6 @@ public class DonateKnowledgeController {
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue,
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 
-		String title = StringEscapeUtils.escapeHtml4(request.getParameter("productName"));
-		String post = StringEscapeUtils.escapeHtml4(request.getParameter("manufacturer"));
-		String tags = StringEscapeUtils.escapeHtml4(request.getParameter("modelName"));
-
 		String bookTitle = StringEscapeUtils.escapeHtml4(request.getParameter("bookTitle"));
 		String authorName = StringEscapeUtils.escapeHtml4(request.getParameter("authorName"));
 		String publisherName = StringEscapeUtils.escapeHtml4(request.getParameter("publisherName"));
@@ -158,13 +154,14 @@ public class DonateKnowledgeController {
 		book.setInsertedBy(user.getEmail());
 		book.setInsertedDate(new Date());
 		book.setIsbn(isbn);
-		if (mrpPrice != null && "".equals(mrpPrice)) {
+		if (mrpPrice != null && !"".equals(mrpPrice)) {
 			book.setMrpPrice(new BigDecimal(mrpPrice));
 		}
 		book.setPiecesInStock(new BigInteger(piecesInStock));
 		book.setProductCategory(ProductCategory.BOOK.getValue());
 		book.setPublisherName(publisherName);
 		book.setYear(Integer.valueOf(year));
+		book.setSecertCode(RandomStringUtils.randomAlphanumeric(8).toUpperCase());
 		
 		service.insertBook(book);
 		mv.addObject("phoneFinder", null);
@@ -221,7 +218,9 @@ public class DonateKnowledgeController {
 			mv.addObject(USER, user);
 		}
 
-		List<Book> bookList = new ArrayList<Book>();
+		List<Product> bookList = service.fetchAllBooks(user.getEmail());
+		
+		/*new ArrayList<Book>();
 
 		Book book = new Book();
 
@@ -242,7 +241,7 @@ public class DonateKnowledgeController {
 		bookList.add(book);
 		bookList.add(book);
 		bookList.add(book);
-		bookList.add(book);
+		bookList.add(book);*/
 
 		mv.addObject("phoneFinder", null);
 		mv.addObject("bookList", bookList);
@@ -263,7 +262,7 @@ public class DonateKnowledgeController {
 			mv.addObject(USER, user);
 		}
 
-		List<Book> bookList = new ArrayList<Book>();
+		List<Product> bookList = service.fetchAllBooksByInsertId(user.getEmail()); /*new ArrayList<Book>();
 
 		Book book = new Book();
 
@@ -284,7 +283,7 @@ public class DonateKnowledgeController {
 		bookList.add(book);
 		bookList.add(book);
 		bookList.add(book);
-		bookList.add(book);
+		bookList.add(book);*/
 
 		mv.addObject("phoneFinder", null);
 		mv.addObject("bookList", bookList);

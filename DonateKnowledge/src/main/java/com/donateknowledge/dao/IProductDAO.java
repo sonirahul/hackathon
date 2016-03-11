@@ -11,6 +11,10 @@ public interface IProductDAO {
 
 	Product fetchBookById(String str) throws Exception;
 
+	List<Product> fetchAllBooks() throws Exception;
+	
+	List<Product> fetchAllBooksByInsertId(String str) throws Exception;
+
 	List<Product> fetchCellPhoneByRegex(String[] searchArr, int skip, int limit, boolean fetchImage)
 			throws Exception;
 
