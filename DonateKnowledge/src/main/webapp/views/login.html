@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cheapest Gadget</title>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="${rc.getContextPath()}/resources/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="${rc.getContextPath()}/resources/css/style.css">
+	<script type="text/javascript" src="${rc.getContextPath()}/resources/js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="${rc.getContextPath()}/resources/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		a:hover{text-decoration: none;}
+		#loginContent{text-align:center;}
+		.loginPageNewUser{text-align: center;position: relative;top: 2px;padding-top: 1px;margin-bottom: 14px;line-height: 0;}
+		.loginPageNewUser h5 {line-height: 1;font-size: 12px;color: #888;font-weight: normal;z-index: 2;position: relative;display: inline-block;background-color: white;padding: 0 8px 0 7px;}
+		.loginPageNewUser:after{content: "";width: 100%;background-color: transparent;display: block;height: 1px;border-top: 1px solid #e7e7e7;position: absolute;top: 50%;margin-top: -1px;z-index: 1;}
+	</style>
+</head>
+<body>
+
+	<div id="loginContent" class="container">
+		<div class="row">
+			<div class="col-xm-12 col-sm-8 col-md-6 col-lg-4 blockCenter">
+				<h3><a href='#'><span class="glyphicon glyphicon-fire"></span> Cheapest Gadget</a></h3>
+				<div class="panel panel-default">
+					<div class="panel-body">
+
+						<h3>Sign In</h3>
+						<form role="form" action="${rc.getContextPath()}/login" method="post">
+							<div class="input-group form-group">
+
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-envelope"></span>
+								</span>
+								<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+							</div>
+							<div class="input-group form-group">
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-lock"></span>
+								</span>
+								<input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+							</div>
+							<div class="checkbox">
+								<label><input type="checkbox"> Remember me</label>
+							</div>
+							<div>
+								<h6><a href="">Forget your Password?</a></h6>
+							</div>
+							<button type="submit" class="btn btn-success">Submit</button>
+							<br/>
+
+
+							<div class="loginPageNewUser">
+								<h5>New User ? </h5>
+							</div>
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Create New Account</button>
+							<br/>
+							<h6>By signing in you are agreeing to our Conditions of Use and Sale and our Privacy Notice.</h6>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		<div id="registerModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"><span class="glyphicon glyphicon-user"></span> SignUp</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div id="signup" class="col-md-6 col-sm-6">
+								<form role="form" method="post" action="${rc.getContextPath()}/register">
+									<div class="input-group form-group">
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-user"></span>
+										</span>
+										<input type="text" class="form-control" id="fullname" placeholder="Full Name" name="fullName">
+									</div>
+									<div class="input-group form-group">
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-envelope"></span>
+										</span>
+										<input type="email" class="form-control" id="email" placeholder="Enter Email Address" name="email">
+									</div>
+									<div class="input-group form-group">
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-envelope"></span>
+										</span>
+										<input type="email" class="form-control" id="re-email" placeholder="Enter Email Address Again">
+									</div>
+									<div class="input-group form-group">
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-lock"></span>
+										</span>
+										<input type="password" class="form-control" id="pwd" placeholder="Password" name="password">
+									</div>
+									<div class="input-group form-group">
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-lock"></span>
+										</span>
+										<input type="password" class="form-control" id="re-pwd" placeholder="Password Again">
+									</div>
+									<button type="submit" class="btn btn-success">SignUp</button>
+								</form>
+							</div>
+							<div id="socialSignup" class="col-md-6 col-sm-6 text-center">
+								<form role="form">
+									<br>
+									<div class="form-group">
+										<span class="lead">Or Quick Signup via</span>
+									</div>
+									<div class="form-group">
+										<button type="button" class="btn btn-primary">Sign in with facebook</button>
+									</div>
+									<div class="form-group">
+										<button type="button" class="btn btn-danger">Sign in with googlePlus</button>
+									</div>
+									<div class="form-group">
+										<button type="button" class="btn btn-info">Sign in with twitter</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+<#include "footer.html">

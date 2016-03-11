@@ -1,0 +1,119 @@
+body{padding-top:100px;}
+body,body *{border-radius:0 !important;}
+.margin-block-top{margin-top:20px;}
+.oa{overflow:auto;}
+.oh{overflow:hidden;}
+.mz{margin:0;}
+.pz{padding:0 !important;}
+.nu,.nu:hover{text-decoration:none;}
+.blockCenter{float:none;margin:0 auto;}
+.fs10{font-size:10px;}
+.fs12{font-size:12px;}
+.fs14{font-size:14px;}
+.fs16{font-size:16px;}
+.fs18{font-size:18px;}
+.fs20{font-size:20px;}
+.fs24{font-size:24px;}
+.fs28{font-size:28px;}
+.fs32{font-size:32px;}
+.fs36{font-size:36px;}
+.fs42{font-size:42px;}
+.fs48{font-size:48px;}
+.fs56{font-size:56px;}
+
+.themeColor{color:#337ab7;}
+.themeColorBg{background-color:#337ab7;border-color:#2e6da4;color:#fff;}
+.themeColorBgHover:hover{background-color:#337ab7;border-color:#2e6da4;color:#fff !important;}
+.themeColorBg a{color:#fff;}
+.themeContentBg{background-color:#f8f8f8;color:#464646;}
+.themeFormbutton{width:200px;}
+.themeBoxShadow{box-shadow: 0 0 5px #BBB;}
+.themeBoxShadowHover:hover{box-shadow: 0 0 5px #BBB;}
+.themeBorder{border-color:#e5e5e5 !important;}
+
+/*Header*/
+	#header-1-2 li:hover a{color:#337ABD;position:relative;z-index:2;}
+	/*navbar right*/
+	.inputForm{padding:8px 0;}
+
+/*3Layered Menu Working*/
+	.cat-1{position:relative;}
+	.cat-1{width:810px;margin:0 auto;}
+	.cat-1>li>a{transition: 0s background color;}
+	.cat-1>li:hover>a{transition-delay:.2s;background:#FFF;}
+	.cat-1>li:hover>ul,.cat-2>li:hover>ul{transition-delay:.2s;visibility:initial;}
+
+	.cat-1>li>a{display:block;padding:10px 30px;margin:1px;margin-bottom:0;}
+	.cat-2,.cat-3,.cat-1 li{padding:0;margin:0;}
+	.cat-2,.cat-3{width:100%;}
+	.cat-2{min-height:300px;left:0;overflow:hidden;}
+	.cat-2>li>a{display:block;padding:10px;}
+	.cat-2,.cat-3{position: absolute;background-color:#fff;z-index:1;visibility:hidden;}
+	.cat-3{border-top:1px solid;height:260px;padding:10px;}
+
+/*footer*/
+	#footer{padding-top: 30px;border-top:1px solid;margin-top:30px;}
+
+/*Product Page*/
+	#mainArea>div,#mainArea>table{transition: all .3s ease-in-out;}
+	#productName{font-size: 30px;padding: 4px 0 4px 20px;}
+	#socialShare li{float:left;padding:0;margin:0;border:none;list-style: none;}
+	#socialShare a {width: 50px;height: 50px;line-height: 50px;padding:0; font-size:24px;border:none;}
+	#productImageContainer{overflow:hidden;}
+	#productImage{width:100%;height: 380px;line-height: 380px;text-align: center;background-repeat: no-repeat;background-position: center;background-size: contain;transition: all .5s ease-in-out;}
+	#productImage:hover{transform: scale(1.05);}
+	#productKeyFeatures{border-left:1px solid}
+	#productKeyFeatures>ul>li{padding:10px 5px;}
+	.featureList .glyphicon,.featureList .fa{font-size:18px;}
+
+	/*Product Quick Link*/
+	#productQuickLink>.row{margin:0;}
+	#productQuickLink>.row>div{border-right:1px solid;}
+	#productQuickLink>.row>div:last-child{border-right:none;}
+	#productQuickLink a{display:block;padding:20px 0;text-align:center;color:#464646;font-weight:bold}
+	#productQuickLink .fa,#productQuickLink .glyphicon{font-size:20px;vertical-align:bottom;}
+	@media (max-width:767px)
+	{	
+		#productName>.fa{font-size:28px;vertical-align:middle;}
+		#productName>span{font-size: 20px;}
+		#productQuickLink a{padding:20px;text-align:left;}
+		#productQuickLink>.row>div{border-right:none;border-bottom:1px solid;}
+	}
+
+	/*Product Specs*/
+	.itemName{text-align: center;}
+	.itemImage{width: 100%;height: 300px;line-height: 200px;text-align: center;background-repeat: no-repeat !important;background-position: center !important;background-size: contain !important;}
+	.itemSpecMainHeading{background-color:#F5F5F5;font-size: 17px;color:#337ab7;width:150px;}
+	.itemSpecSubHeading {font-size: 13px;width:150px;}
+	@media (max-width: 767px) {
+		body{padding-top:50px;} 
+		#phoneSel1 .form-group,#phoneSel2 .form-group {margin-bottom: 5px;}
+		#phoneSel1 .form-control,#phoneSel2 .form-control,#phoneSel1 .btn,#phoneSel2 .btn{height:25px;padding:3px;}
+		#itemSpecs td{padding:5px !important;}
+		.itemName{font-size:16px;}
+		.itemImage{height:150px;}
+		.itemSpecMainHeading{font-size:12px;width:60px;font-weight:bold;}
+		.itemSpecSubHeading {font-size:11px;width:60px;}
+	}
+
+
+@media (max-width: 767px) { 
+	.navbar{min-height:initial;}
+	.mobilePad>.row>div{padding:0;}
+	#mainArea{margin-top:50px;padding:0;}
+	#header-1-1{background-color: #fff;}
+	
+	#socialShare {position: absolute;right:0;top: -50px;}
+}
+@media (min-width: 768px) { 
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 1200px) { 
+}
+
+/*SearchBar*/
+	.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+	.autocomplete-suggestion { padding: 5px 5px; white-space: nowrap; overflow: hidden; font-size:16px}
+	.autocomplete-selected { background: #F8F8F8; }
+	.autocomplete-suggestions strong { font-weight: bold; color: #3399FF; }

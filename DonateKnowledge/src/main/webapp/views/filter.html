@@ -1,0 +1,148 @@
+<style>
+	.panel-header a{display:block;padding: 10px 15px;border-bottom: 1px solid transparent;}
+	.panel-body{overflow:auto;}
+	
+	.price-text{display:block; padding-bottom:30px;}
+	#filter-brand .panel-body{height:200px;}
+</style>
+
+<h3>Filter</h3>
+<div class="panel-group">
+	<div id="filter-price" class="panel panel-default">
+		<div class="panel-header themeColorBg">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" href="#collapse0">Price</a>
+			</h4>
+		</div>
+		<div id="collapse0" class="panel-collapse collapse in">
+			<div class="panel-body">
+				<span class="price-text">Price : </span>
+				<input class="rangerBar" type="text" class="span2" value=""
+					data-slider-min="#{(phoneFinder.minPrice)}" data-slider-max="#{(phoneFinder.maxPrice)}"
+					data-slider-step="5" data-slider-value="[17000,19000]" />
+			</div>
+		</div>
+	</div>
+
+
+	<div id="filter-brand" class="panel panel-default">
+		<div class="panel-header themeColorBg">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" href="#collapse1">Brand</a>
+			</h4>
+		</div>
+		<div id="collapse1" class="panel-collapse collapse in">
+			<div class="panel-body">
+
+				<ul class="list-unstyled">
+					<#if (phoneFinder.manufacturerList)??>
+						<#list phoneFinder.manufacturerList as manufacturer>
+							<li title="${manufacturer}"><input type="checkbox"
+								value="${manufacturer}"> <span>${manufacturer?capitalize}</span>
+							</li>
+						</#list>
+					</#if>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+
+	<div id="filter-ram" class="panel panel-default">
+		<div class="panel-header themeColorBg">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" href="#collapse2">RAM</a>
+			</h4>
+		</div>
+		<div id="collapse2" class="panel-collapse collapse in">
+			<div class="panel-body">
+				<span class="ram-text">RAM : </span>
+				<input class="rangerBar" type="text" class="span2" value=""
+					data-slider-min="#{(phoneFinder.minRam)}" data-slider-max="#{(phoneFinder.maxRam)}"
+					data-slider-step="1" data-slider-value="[1,2]" />	
+			</div>
+		</div>
+	</div>
+
+	<div id="filter-screen" class="panel panel-default">
+		<div class="panel-header themeColorBg">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" href="#collapse3">Screen Size</a>
+			</h4>
+		</div>
+		<div id="collapse3" class="panel-collapse collapse in">
+			<div class="panel-body">
+				<span class="ram-text">Screen Size : </span>
+				<input class="rangerBar" type="text" class="span2" value=""
+					data-slider-min="#{(phoneFinder.minScreenSize)}" data-slider-max="#{(phoneFinder.maxScreenSize)}"
+					data-slider-step=".1" data-slider-value="[4,5]" />			
+			</div>
+		</div>
+	</div>
+
+	<div id="filter-os" class="panel panel-default">
+		<div class="panel-header themeColorBg">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" href="#collapse4">Operating System</a>
+			</h4>
+		</div>
+		<div id="collapse4" class="panel-collapse collapse in">
+			<div class="panel-body">
+				<ul class="list-unstyled">
+					<#if (phoneFinder.osList)??>
+						<#list phoneFinder.osList as os>
+							<li title="${os}"><input type="checkbox" value="${os}">
+								<span original="${os?capitalize}">${os?capitalize}</span>
+							</li>
+						</#list>
+					</#if>
+				</ul>				
+			</div>
+		</div>
+	</div>
+
+	<div id="filter-res" class="panel panel-default">
+		<div class="panel-header themeColorBg">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" href="#collapse5">Resolution</a>
+			</h4>
+		</div>
+		<div id="collapse5" class="panel-collapse collapse in">
+			<div class="panel-body">
+				<ul class="list-unstyled">
+					<li title="Samsung"><input type="checkbox" value="512 MB &amp; Below">
+						<span  original="512">320 * 480</span>
+					</li>
+					<li title="Samsung"><input type="checkbox" value="512 MB &amp; Below">
+						<span  original="1">Less than HD</span>
+					</li>
+					<li title="Samsung"><input type="checkbox" value="512 MB &amp; Below">
+						<span  original="2">HD</span>
+					</li>
+					<li title="Samsung"><input type="checkbox" value="512 MB &amp; Below">
+						<span  original="3">Full HD</span>
+					</li>
+					<li title="Samsung"><input type="checkbox" value="512 MB &amp; Below">
+						<span  original="4">Ultra HD</span>
+					</li>
+					<li title="Samsung"><input type="checkbox" value="512 MB &amp; Below">
+						<span  original="4">Retina Display</span>
+					</li>
+				</ul>				
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<link href="${rc.getContextPath()}/resources/css/bootstrap-slider.css" rel="stylesheet">
+<script type='text/javascript' src="${rc.getContextPath()}/resources/js/modernizr.js"></script>
+<script type='text/javascript' src="${rc.getContextPath()}/resources/js/bootstrap-slider.js"></script>
+<script type='text/javascript'>
+	$(document).ready(function() {
+		$(".rangerBar").slider({});
+		alert($("#filter-ram .slider-handle.min-slider-handle.round").attr("aria-valuenow"));
+		alert($(".slider-handle.max-slider-handle.round").attr("aria-valuenow"));
+	});
+	
+</script>

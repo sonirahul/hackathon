@@ -1,0 +1,88 @@
+<#include "header.html">
+<style type="text/css">
+	.itemImage{height: 200px;line-height: 200px;}
+	.thumbnail{text-transform:capitalize;color:#464646;}
+	.model {padding: 5px;}
+	.modelQuickInfo,.modelAddToCompare{padding-top:10px;border-top:1px solid;clear:both;}
+	.modelAddToCompare span{display:inline-block; margin: 3px 0 0;}
+	.modelQuickInfo ul{padding-left:20px;}
+	@media (max-width: 767px) { 
+		.itemImage{width:30%;height:90px;float: left;}
+		.thumbnail{border:none;border-top: 1px solid #e5e5e5;overflow:auto;margin:10px 0;padding:5px 0;}
+		#searchResults>.row>div:first-child>.thumbnail{border-top:none;}
+		.modelQuickInfo,.modelAddToCompare{border-top:none;}
+		.modelQuickInfo ul{margin:0;}
+		.modelAddToCompare{padding-top:0;}
+		.modelAddToCompare.checkbox{margin:0;}
+		.model{position:relative;}
+		.model h5{position:relative;top:15px;}
+	}
+</style>
+<div id="searchContent" class="container margin-block-top">
+	<div class="row">
+		<div class="col-md-9">
+			<h3>Search Result</h3>
+			<div id="searchResults">
+				<div class="row">
+
+					<#if phoneList??>
+					<#list phoneList as phone>
+					<div class="col-xm-12 col-sm-4 col-md-3 col-lg-3"> 
+						<a href='${rc.getContextPath()}/product/${(phone.productId)?replace(" ", "_")}' class="thumbnail nu themeBoxShadowHover">
+							<div class="itemImage" style="background:url('data:image/jpeg;base64,${(phone.productImage)!}');">
+							</div>
+							<div class="model fs14">
+								<h4>
+									<span class='brandName'>${phone.manufacturer}</span>
+									<span class='modelName'>${phone.productId}</span>
+								</h4>
+							</div>
+							<div class="modelQuickInfo fs12 themeBorder themeBorder">
+								<ul>
+									<li>
+										<#if (phone.models[0].os)??>
+										${(phone.models[0].os.osName?upper_case)!"Not Known"}
+										${(phone.models[0].os.osVersion)!}
+										${("Upgradable to " + phone.models[0].os.osVersionUpgradeableTo)!}
+										</#if>
+									</li>
+									<li>12MP 2160p</li>
+									<li>
+										${(phone.models[0].memory.ram + " GB Ram")!}
+										${(phone.models[0].chip)!}
+									</li>
+									<li>
+										<#if (phone.models[0].memory.internalStorage)??>
+										${phone.models[0].memory.internalStorage?join("/")} Storage,
+										</#if>
+										<#if (phone.models[0].memory.cardSlotExpendable)?size != 0>
+										${phone.models[0].memory.cardSlotExpendable?join(",")}
+										<#else>
+										No Card Slot
+										</#if>
+									</li>
+								</ul>
+							</div> 
+							<div class="modelAddToCompare fs12 themeBorder checkbox themeBorder">
+								<label>
+									<input type="checkbox" value="">
+									<span> Add To Compare</span>
+								</label>
+							</div>
+						</a> 
+					</div>
+					</#list>
+					</#if>
+
+
+
+
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+		
+		</div>
+	</div>
+</div>
+<#include "footer.html">

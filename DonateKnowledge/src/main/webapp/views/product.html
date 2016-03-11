@@ -1,0 +1,454 @@
+<#include "header.html">
+	<#if phone.models[0].cameras??>
+		<#list phone.models[0].cameras as camera>
+			<#if (camera.cameraType)?contains("Back Camera")>
+				<#assign backCam = camera>
+			</#if>
+			<#if (camera.cameraType)?contains("Front Camera")>
+				<#assign frontCam = camera>
+			</#if>
+			<#if (camera.cameraType)?contains("Camcorder")>
+				<#assign camCoder = camera>
+			</#if>
+		</#list>
+	</#if>
+	<!-- ${backCam!}
+	${frontCam!}
+	${camCoder!}-->
+	
+	
+	<div id="product" class="container margin-block-top">
+		<div class="row">
+			<div id="mainArea" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+				<div id="productSummary" class="panel-group themeBoxShadowHover">
+					<div class="panel panel-default">
+						<div id="productInfoShare" class="themeContentBg oa">
+							<div id="productName" class="pull-left">
+								<i class="fa fa-mobile"></i> <span> ${(phone.productId)?capitalize!} </span> 
+							</div>
+							<div id="socialShare" class="pull-right">
+								<ul class="mz pz">
+									<li class="hidden-md hidden-lg"><a href="" class="btn btn-success"><i class='fa fa-whatsapp'></i></a></li>
+									<li><a href="" class="btn btn-primary"><i class='fa fa-facebook'></i></a></li>
+									<li><a href="" class="btn btn-danger"><i class='fa fa-google-plus'></i></a></li>
+									<li><a href="" class="btn btn-info"><i class='fa fa-twitter'></i></a></li>
+								</ul>
+							</div>
+						</div>
+						<div id="productImageQuickSpec" class="panel-body oa">
+							<div class="row">
+								<div id="productImageContainer" class="col-md-6 col-sm-6 oa themeBorder">
+									<div id="productImage" style="background-image:url('data:image/jpeg;base64,${(phone.productImage)!}');">
+									</div>
+								</div>
+								<div id="productKeyFeatures" class="col-md-6 col-sm-6 oa themeContentBg themeBorder">
+									<ul class="featureList list-unstyled mz pz">
+										<h3 class="">Quick View</h3>
+										<li>
+											<span class="glyphicon glyphicon-calendar fs18"></span> <#if (phone.releasedDate)??>${phone.releasedDate?date}<#else>Not Known</#if>
+										</li>
+										<li>
+											<span class="glyphicon glyphicon-resize-full"></span>
+											${(phone.models[0].display.size + " in")!}
+											${("(~" + phone.models[0].display.screenBodyRatio + "screen-to-body ratio)")!} 
+										</li>
+										<li>
+											<span class="glyphicon glyphicon-camera"></span>
+											<#if (backCam)??>
+												${(backCam.megapixel + "MP")!"Not Known"}
+											</#if>
+											<!-- } 2160p--> 
+										</li>
+										<li>
+											<span class="glyphicon glyphicon-cog"></span>
+											${(phone.models[0].memory.ram + " GB Ram")!}
+											${(phone.models[0].chip)!}
+										</li>
+										<li>
+											<span class="glyphicon glyphicon-hdd"></span>
+											<#if (phone.models[0].memory.internalStorage)??>
+												${phone.models[0].memory.internalStorage?join("/")} Storage,
+											</#if>
+											<#if (phone.models[0].memory.cardSlotExpendable)?size != 0>
+												${phone.models[0].memory.cardSlotExpendable?join(",")}
+											<#else>
+												No Card Slot
+											</#if>
+										</li>
+										<li>
+											<span class="glyphicon glyphicon-hourglass"></span>
+											<#if (phone.models[0].battery.capacity)??>
+												${phone.models[0].battery.capacity} mAh,
+											</#if>
+											<#if (phone.models[0].battery.technology)??>
+												${phone.models[0].battery.technology}	
+											</#if>
+										</li>
+										<li>
+											<span class="glyphicon glyphicon-sound-stereo"></span>
+											<#if (phone.models[0].os)??>
+												${(phone.models[0].os.osName?upper_case)!"Not Known"}
+												${(phone.models[0].os.osVersion)!}
+												${("Upgradable to " + phone.models[0].os.osVersionUpgradeableTo)!}
+											</#if>
+										</li>
+										<li>
+											<span class="glyphicon glyphicon-resize-horizontal"></span>
+											${(phone.body.weight + "g,")!}
+											${(phone.body.length + "mm thickness")!}											
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div id="productQuickLink" class="themeContentBg">
+							<div class="row">
+								<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 themeBorder pz">
+									<a href="" class="nu themeColorBgHover"><i class="fa fa-eye"></i> Review</a>
+								</div>
+								<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 themeBorder pz">
+									<a href="" class="nu  themeColorBgHover"><i class="fa fa-comments"></i> Comments</a>
+								</div>
+								<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 themeBorder pz">
+									<a href="" class="nu themeColorBgHover"><i class="fa fa-picture-o"></i> Pictures</a>
+								</div>
+								<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 themeBorder pz">
+									<a href="" class="nu themeColorBgHover"><span class="glyphicon glyphicon-transfer"></span> Compare</a>
+								</div>
+								<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 themeBorder pz">
+									<a href="" class="nu themeColorBgHover"><i class="fa fa-usd"></i> Price</a>
+								</div>
+								<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 themeBorder pz">
+									<a href="" class="nu themeColorBgHover"><i class="fa fa-thumbs-up"></i> Like</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<table id="itemSpecs" class="table table-bordered table-responsive themeBoxShadowHover">
+					<tbody>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Network</td>
+						</tr>
+						<tr>
+							<td rowspan="7" class="itemSpecMainHeading hidden-xs hidden-sm">Network</td>
+							<td class="itemSpecSubHeading">Technology</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">2G Brands</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">3G Network</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">4G Network</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Speed</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">GPRS</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">EDGE</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Launch</td>
+						</tr>
+						<tr>
+							<td rowspan="2" class="itemSpecMainHeading hidden-xs hidden-sm">Launch</td>
+							<td class="itemSpecSubHeading">Announced</td>
+							<td><#if (phone.releasedDate)??>${phone.releasedDate?date}<#else>Not Known</#if></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Status</td>
+							<td><#if (phone.available)??>${phone.available}<#else>Not Known</#if></td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Body</td>
+						</tr>
+						<tr>
+							<td rowspan="3" class="itemSpecMainHeading hidden-xs hidden-sm">Body</td>
+							<td class="itemSpecSubHeading">Dimensions</td>
+							<td>
+								${(phone.body.height + " x")!"Not Known"}
+								${(phone.body.width + " x")!}
+								${(phone.body.length + " mm")!}
+								${("(" + phone.body.height / 25.4 + " x")!}
+								${(phone.body.width / 25.4 + " x")!}
+								${(phone.body.length / 25.4 + " in)")!}
+								
+							</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Weight</td>
+							<td>${(phone.body.weight + "g")!"Not Known"}</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">SIM</td>
+							<td>
+								<#if (phone.models[0].simSlotTypes)?size != 0>
+									${phone.models[0].simSlotTypes?join(", ")}
+								<#else>
+									Not Known
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Display</td>
+						</tr>
+						<tr>
+							<td rowspan="4" class="itemSpecMainHeading hidden-xs hidden-sm">Display</td>
+							<td class="itemSpecSubHeading">Type</td>
+							<td>${(phone.models[0].display.technology)!"Not Known"}</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Size</td>
+							<td>${(phone.models[0].display.size)!"Not Known"}</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Resolution</td>
+							<td>${(phone.models[0].display.resolution)!"Not Known"}</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Multitouch</td>
+							<td>${(phone.models[0].display.multiTouch?then("Yes", "No"))!"Not Known"}</td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Platform</td>
+						</tr>
+						<tr>
+							<td rowspan="4" class="itemSpecMainHeading hidden-xs hidden-sm">Platform</td>
+							<td class="itemSpecSubHeading">OS</td>
+							<td>
+								<#if (phone.models[0].os)??>
+									${(phone.models[0].os.osName?upper_case)!"Not Known"}
+									${(phone.models[0].os.osVersion)!}
+									${("Upgradable to " + phone.models[0].os.osVersionUpgradeableTo)!}
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Chipset</td>
+							<td>${(phone.models[0].chip)!}</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">CPU</td>
+							<td>${(phone.models[0].cpu)!}</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">GPU</td>
+							<td>${(phone.models[0].gpu)!}</td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Memory</td>
+						</tr>
+						<tr>
+							<td rowspan="2" class="itemSpecMainHeading hidden-xs hidden-sm">Memory</td>
+							<td class="itemSpecSubHeading">Card Slot</td>
+							<td>
+								<#if (phone.models[0].memory.cardSlotExpendable)?size != 0>
+									${phone.models[0].memory.cardSlotExpendable?join(",")}
+								<#else>
+									No Card Slot
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Internal</td>
+							<td>
+								<#if (phone.models[0].memory.internalStorage)??>
+									${phone.models[0].memory.internalStorage?join("/")} Storage
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Camera</td>
+						</tr>
+						<tr>
+							<td rowspan="4" class="itemSpecMainHeading hidden-xs hidden-sm">Camera</td>
+							<td class="itemSpecSubHeading">Primary</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Features</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Video</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Secondary</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Sound</td>
+						</tr>
+						<tr>
+							<td rowspan="3" class="itemSpecMainHeading hidden-xs hidden-sm">Sound</td>
+							<td class="itemSpecSubHeading">Alert Types</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Loudspeaker</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">3.5mm Jack</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Comms</td>
+						</tr>
+						<tr>
+							<td rowspan="7" class="itemSpecMainHeading hidden-xs hidden-sm">Comms</td>
+							<td class="itemSpecSubHeading">WLAN</td>
+							<td>
+								<#if (phone.models[0].connectivity.wifiType)??>
+									Yes, with ${phone.models[0].connectivity.wifiType?join(", ")}
+								<#else>
+									Not Known
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Bluetooth</td>
+							<td>${(phone.models[0].connectivity.bluetoothVersion)!"Not Known"}</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">GPS</td>
+							<td>
+								<#if (phone.models[0].connectivity.gpsType)??>
+									Yes, with ${phone.models[0].connectivity.gpsType?join(", ")}
+								<#else>
+									Not Known
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">NFC</td>
+							<td>
+								<#if (phone.models[0].connectivity.otherFeatures)??>
+									${phone.models[0].connectivity.otherFeatures?seq_contains("Nfc")?string("yes", "no")}
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Infrared Port</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Radio</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">USB</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Features</td>
+						</tr>
+						<tr>
+							<td rowspan="5" class="itemSpecMainHeading hidden-xs hidden-sm">Features</td>
+							<td class="itemSpecSubHeading">&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Messaging</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Browser</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Java</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Battery</td>
+						</tr>
+						<tr>
+							<td rowspan="4" class="itemSpecMainHeading hidden-xs hidden-sm">Battery</td>
+							<td class="itemSpecSubHeading">&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Stand By</td>
+							<td>
+								<#if (phone.models[0].battery.standBy)??>
+									Up to ${phone.models[0].battery.standBy}h (3G)
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Talk Time</td>
+							<td>
+								<#if (phone.models[0].battery.talkTime)??>
+									Up to ${phone.models[0].battery.talkTime}h (3G)
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Music Play</td>
+							<td>
+								<#if (phone.models[0].battery.musicPlay)??>
+									Up to ${phone.models[0].battery.musicPlay}h
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Misc</td>
+						</tr>
+						<tr>
+							<td rowspan="2" class="itemSpecMainHeading hidden-xs hidden-sm">Misc</td>
+							<td class="itemSpecSubHeading">&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Price Group</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Tests</td>
+						</tr>
+						<tr>
+							<td rowspan="5" class="itemSpecMainHeading hidden-xs hidden-sm">Tests</td>
+							<td class="itemSpecSubHeading">Performance</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Display</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">LoudSpeaker</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Audio Quality</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="itemSpecSubHeading">Battery Life</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+	<#include "footer.html">

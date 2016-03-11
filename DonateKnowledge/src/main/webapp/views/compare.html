@@ -1,0 +1,418 @@
+<#include "header.html">
+<style type="text/css">
+</style>
+<div id="compare" class="container margin-block-top">
+	<div class="row">
+
+		<div class="panel panel-default">
+			<table id="itemSpecs" class="table table-bordered table-responsive">
+				<tbody>
+					<tr>
+						<td colspan='1' class="hidden-md hidden-lg"></td>
+						<td colspan='2' class="hidden-xs hidden-sm"></td>
+						<td width="" class="">
+							<h5>Compare With</h5>
+							<form id="phoneSel1" class="form-inline" role="form">
+								<div class="form-group">
+									<input type="text" class="form-control" id="mobile1" placeholder='Phone 1'>
+								</div>
+								<button type="submit" class="btn btn-primary">Search</button>
+							</form>
+							<h3 class="itemName">Apple iPhone 6S</h3>
+							<div class="itemImage" style="background:url('${rc.getContextPath()}/resources/images/iphone.png');"></div>
+						</td>
+						<td width="" class="">
+							<h5>Compare With</h5>
+							<form id="phoneSel2" class="form-inline" role="form">
+								<div class="form-group">
+									<input type="text" class="form-control" id="mobile2" placeholder='Phone 2'>
+								</div>
+								<button type="submit" class="btn btn-primary">Search</button>
+							</form>
+							<h3 class="itemName">Apple iPhone 6S</h3>
+							<div class="itemImage" style="background:url('${rc.getContextPath()}/resources/images/iphone.png');"></div>
+						</td>
+						<td width="" class="hidden-xs hidden-sm">
+							<h5>Compare With</h5>
+							<form id="phoneSel2" class="form-inline" role="form">
+								<div class="form-group">
+									<input type="text" class="form-control" id="mobile3" placeholder='Phone 3'>
+								</div>
+								<button type="submit" class="btn btn-primary">Search</button>
+							</form>
+							<h3 class="itemName">Apple iPhone 6S</h3>
+							<div class="itemImage" style="background:url('${rc.getContextPath()}/resources/images/iphone.png');"></div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Network</td>
+					</tr>
+					<tr>
+						<td rowspan="7" class="itemSpecMainHeading hidden-xs hidden-sm">Network</td>
+						<td class="itemSpecSubHeading">Technology</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">2G Brands</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">3G Network</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">4G Network</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Speed</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">GPRS</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">EDGE</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Launch</td>
+					</tr>
+					<tr>
+						<td rowspan="2" class="itemSpecMainHeading hidden-xs hidden-sm">Launch</td>
+						<td class="itemSpecSubHeading">Announced</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Status</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Body</td>
+					</tr>
+					<tr>
+						<td rowspan="3" class="itemSpecMainHeading hidden-xs hidden-sm">Body</td>
+						<td class="itemSpecSubHeading">Dimensions</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Weight</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">SIM</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Display</td>
+					</tr>
+					<tr>
+						<td rowspan="4" class="itemSpecMainHeading hidden-xs hidden-sm">Display</td>
+						<td class="itemSpecSubHeading">Type</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Size</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Resolution</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Multitouch</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Platform</td>
+					</tr>
+					<tr>
+						<td rowspan="4" class="itemSpecMainHeading hidden-xs hidden-sm">Platform</td>
+						<td class="itemSpecSubHeading">OS</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Chipset</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">CPU</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">GPU</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Memory</td>
+					</tr>
+					<tr>
+						<td rowspan="2" class="itemSpecMainHeading hidden-xs hidden-sm">Memory</td>
+						<td class="itemSpecSubHeading">Card Slot</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Internal</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Camera</td>
+					</tr>
+					<tr>
+						<td rowspan="4" class="itemSpecMainHeading hidden-xs hidden-sm">Camera</td>
+						<td class="itemSpecSubHeading">Primary</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Features</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Video</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Secondary</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Sound</td>
+					</tr>
+					<tr>
+						<td rowspan="3" class="itemSpecMainHeading hidden-xs hidden-sm">Sound</td>
+						<td class="itemSpecSubHeading">Alert Types</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Loudspeaker</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">3.5mm Jack</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Comms</td>
+					</tr>
+					<tr>
+						<td rowspan="7" class="itemSpecMainHeading hidden-xs hidden-sm">Comms</td>
+						<td class="itemSpecSubHeading">WLAN</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Bluetooth</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">GPS</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">NFC</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Infrared Port</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Radio</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">USB</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Features</td>
+					</tr>
+					<tr>
+						<td rowspan="5" class="itemSpecMainHeading hidden-xs hidden-sm">Features</td>
+						<td class="itemSpecSubHeading">&nbsp;</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Messaging</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Browser</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Java</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">&nbsp;</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Battery</td>
+					</tr>
+					<tr>
+						<td rowspan="4" class="itemSpecMainHeading hidden-xs hidden-sm">Battery</td>
+						<td class="itemSpecSubHeading">&nbsp;</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Stand By</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Talk Time</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Music Play</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Misc</td>
+					</tr>
+					<tr>
+						<td rowspan="2" class="itemSpecMainHeading hidden-xs hidden-sm">Misc</td>
+						<td class="itemSpecSubHeading">&nbsp;</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Price Group</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="itemSpecMainHeading hidden-md hidden-lg">Tests</td>
+					</tr>
+					<tr>
+						<td rowspan="5" class="itemSpecMainHeading hidden-xs hidden-sm">Tests</td>
+						<td class="itemSpecSubHeading">Performance</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Display</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">LoudSpeaker</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Audio Quality</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+					<tr>
+						<td class="itemSpecSubHeading">Battery Life</td>
+						<td></td>
+						<td></td>
+						<td class="hidden-xs hidden-sm"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
+
+<#include "footer.html">

@@ -1,0 +1,8 @@
+<#include "header.html">
+<#if (exp)??>
+	<h1>${exp.errCode}</h1>
+	<h4>${exp.errMsg}</h4>
+<#else>
+	<h1>Koi toh error aaya h bhai, sambhal le</h1>
+</#if>
+<#include "footer.html">
