@@ -15,7 +15,7 @@ public class Book extends Product {
     private String isbn;
     private String edition;
     private Integer year;
-    private Integer cost;
+    private String genre;
     
     public String getBookTitle() {
 		return bookTitle;
@@ -54,17 +54,17 @@ public class Book extends Product {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-	public Integer getCost() {
-		return cost;
-	}
-	public void setCost(Integer cost) {
-		this.cost = cost;
-	}
 
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
 	@Override
 	public String toString() {
 		return "Book [bookTitle=" + bookTitle + ", authorName=" + authorName + ", publisherName=" + publisherName
-				+ ", isbn=" + isbn + ", edition=" + edition + ", year=" + year + ", cost=" + cost + ", toString()="
+				+ ", isbn=" + isbn + ", edition=" + edition + ", year=" + year + ", toString()="
 				+ super.toString() + "]";
 	}
 }

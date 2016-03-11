@@ -82,7 +82,7 @@ public class DonateKnowledgeAjaxController {
 		}
 		else {
 			mv = new ModelAndView(SEARCH_PAGE);
-			Set<Product> phoneList = service.fetchCellPhone(productName, 20, true);
+			Set<Product> phoneList = service.fetchProduct(productName, 20, true);
 			mv.addObject(PHONE_LIST, phoneList);
 		}
 
@@ -99,7 +99,7 @@ public class DonateKnowledgeAjaxController {
 		Set<Tag> result = new LinkedHashSet<Tag>();
 
 		int limit = 10; 
-		Set<Product> phoneSet = service.fetchCellPhone(tagName, limit, false);
+		Set<Product> phoneSet = service.fetchProduct(tagName, limit, false);
 		int i = 0;
 		for (Product itr : phoneSet) {
 			result.add(new Tag(i++, itr.getProductId()));

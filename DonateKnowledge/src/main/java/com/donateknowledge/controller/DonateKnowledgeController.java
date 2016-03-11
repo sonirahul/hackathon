@@ -6,6 +6,10 @@ import static com.donateknowledge.constant.ApplicationConstants.SESSION_COOKIE;
 import static com.donateknowledge.constant.ApplicationConstants.SESSION_COOKIE_DEFAULT;
 import static com.donateknowledge.constant.ApplicationConstants.USER;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.donateknowledge.dto.product.ProductCategory;
+import com.donateknowledge.dto.product.book.Book;
 import com.donateknowledge.dto.user.User;
 import com.donateknowledge.service.IDonateKnowledgeService;
 
@@ -29,7 +35,7 @@ public class DonateKnowledgeController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DonateKnowledgeController.class);
 
 	@Autowired private IDonateKnowledgeService service;
-	
+
 	@RequestMapping(value = {"/newpost"}, method = RequestMethod.GET)
 	public ModelAndView getNewPost(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue, 
@@ -47,20 +53,20 @@ public class DonateKnowledgeController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping(value = {"/newpost"}, method = RequestMethod.POST)
 	public void submitNewPost(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue, 
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 
-        String title = StringEscapeUtils.escapeHtml4(request.getParameter("subject"));
-        String post = StringEscapeUtils.escapeHtml4(request.getParameter("body"));
-        String tags = StringEscapeUtils.escapeHtml4(request.getParameter("tags"));
+		String title = StringEscapeUtils.escapeHtml4(request.getParameter("subject"));
+		String post = StringEscapeUtils.escapeHtml4(request.getParameter("body"));
+		String tags = StringEscapeUtils.escapeHtml4(request.getParameter("tags"));
 
-        User user = service.getLoggedInUser(cookieValue, session, response);
+		User user = service.getLoggedInUser(cookieValue, session, response);
 
-        /*ModelAndView mv = null;
-        
+		/*ModelAndView mv = null;
+
         if (user == null) {
         	mv = new ModelAndView(LOGIN_PAGE);   // only logged in users can post to blog
         }
@@ -86,7 +92,7 @@ public class DonateKnowledgeController {
             // now redirect to the blog permalink
             response.redirect("/post/" + permalink);
         }*/
-    }
+	}
 
 	@RequestMapping(value = {"/compare"}, method = RequestMethod.GET)
 	public ModelAndView compare(
@@ -114,24 +120,47 @@ public class DonateKnowledgeController {
 		mv.addObject("phoneFinder", null);
 		return mv;
 	}
-	
+
 	@RequestMapping(value = {"/uploader"}, method = RequestMethod.POST)
 	public ModelAndView submitUploader(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue, 
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 
 
-        String title = StringEscapeUtils.escapeHtml4(request.getParameter("productName"));
-        String post = StringEscapeUtils.escapeHtml4(request.getParameter("manufacturer"));
-        String tags = StringEscapeUtils.escapeHtml4(request.getParameter("modelName"));
-        
-        System.out.println("testing productName:" + title + ", manufacturer:" + post + ", modelName:" + tags);
+		String bookTitle = StringEscapeUtils.escapeHtml4(request.getParameter("bookTitle"));
+		String authorName = StringEscapeUtils.escapeHtml4(request.getParameter("authorName"));
+		String publisherName = StringEscapeUtils.escapeHtml4(request.getParameter("publisherName"));
+		String isbn = StringEscapeUtils.escapeHtml4(request.getParameter("isbn"));
+		String year = StringEscapeUtils.escapeHtml4(request.getParameter("year"));
+		String edition = StringEscapeUtils.escapeHtml4(request.getParameter("edition"));
+		String mrpPrice = StringEscapeUtils.escapeHtml4(request.getParameter("mrpPrice"));
+		String piecesInStock = StringEscapeUtils.escapeHtml4(request.getParameter("piecesInStock"));
 
-		ModelAndView mv = new ModelAndView("uploader");
+		System.out.println("testing productName:" + bookTitle + ", manufacturer:" + bookTitle + ", modelName:" + bookTitle);
+
+		Book book = new Book();
+		book.setAuthorName(authorName);
+		book.setBookTitle(bookTitle);
+		book.setEdition(edition);
+		book.setGenre("");
+
+		ModelAndView mv = new ModelAndView("donateSuccess");
 		User user = service.getLoggedInUser(cookieValue, session, response);
 		if (user != null) {
 			mv.addObject(USER, user);
 		}
+		book.setInsertedBy(user.getEmail());
+		book.setInsertedDate(new Date());
+		book.setIsbn(isbn);
+		if (mrpPrice != null && "".equals(mrpPrice)) {
+			book.setMrpPrice(new BigDecimal(mrpPrice));
+		}
+		book.setPiecesInStock(new BigInteger(piecesInStock));
+		book.setProductCategory(ProductCategory.BOOK.getValue());
+		book.setPublisherName(publisherName);
+		book.setYear(Integer.valueOf(year));
+		
+		service.insertBook(book);
 		mv.addObject("phoneFinder", null);
 		return mv;
 	}
@@ -157,7 +186,7 @@ public class DonateKnowledgeController {
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 
 
-      
+
 
 		ModelAndView mv = new ModelAndView("receive");
 		User user = service.getLoggedInUser(cookieValue, session, response);

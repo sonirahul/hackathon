@@ -38,9 +38,11 @@ public interface IDonateKnowledgeService {
 
 	User findUserByEmail(String email, boolean updateLastLogin) throws Exception;
 
-	Set<Product> fetchCellPhone(String searchStr, int limit, boolean fetchImage) throws Exception;
+	Set<Product> fetchProduct(String searchStr, int limit, boolean fetchImage) throws Exception;
 
 	List<Product> fetchCellPhoneByTextIndex(String searchStr, int limit, boolean fetchImage) throws Exception;
 
 	List<Product> fetchCellPhoneByRegex(String searchStr, int limit, boolean fetchImage) throws Exception;
+	
+	boolean insertBook(Product product) throws Exception;
 }

@@ -50,7 +50,7 @@ public class BookDAOImpl implements IProductDAO  {
 	}
 
 	@Override
-	public boolean insertCellPhone(Product book) throws JsonProcessingException {
+	public boolean insertProduct(Product book) throws JsonProcessingException {
 
 		try {
 			String jsonInString = DonateKnowledgeUtils.javaToJson(book);
