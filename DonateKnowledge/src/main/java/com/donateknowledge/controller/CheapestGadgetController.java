@@ -154,7 +154,7 @@ public class CheapestGadgetController {
 		return mv;
 	}
 
-	@RequestMapping(value = {"/donate"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/donate"}, method = RequestMethod.GET)
 	public ModelAndView donate(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue, 
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
@@ -169,7 +169,7 @@ public class CheapestGadgetController {
 	}
 
 
-	@RequestMapping(value = {"/receive"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/receive"}, method = RequestMethod.GET)
 	public ModelAndView receive(
 			@CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue, 
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
