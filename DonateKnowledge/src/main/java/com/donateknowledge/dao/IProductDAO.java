@@ -22,4 +22,6 @@ public interface IProductDAO {
 			throws Exception;
 	
 	Product markSold(String isbn) throws Exception;
+
+	Product tempBlockBook(String email, String isbn) throws Exception;
 }

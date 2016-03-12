@@ -1,5 +1,7 @@
 package com.donateknowledge.dto.product.book;
 
+import java.util.Date;
+
 import com.donateknowledge.dto.product.Product;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -18,6 +20,9 @@ public class Book extends Product {
     private String genre;
     private String secretCode;
     private boolean available = true;
+    private boolean tempBlocked=false;
+    private Date tempBlockedOn;
+    private String tempBlockedBy;
     
     public String getBookTitle() {
 		return bookTitle;
@@ -77,10 +82,29 @@ public class Book extends Product {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
+	public boolean isTempBlocked() {
+		return tempBlocked;
+	}
+	public void setTempBlocked(boolean tempBlocked) {
+		this.tempBlocked = tempBlocked;
+	}
+	public Date getTempBlockedOn() {
+		return tempBlockedOn;
+	}
+	public void setTempBlockedOn(Date tempBlockedOn) {
+		this.tempBlockedOn = tempBlockedOn;
+	}
+	public String getTempBlockedBy() {
+		return tempBlockedBy;
+	}
+	public void setTempBlockedBy(String tempBlockedBy) {
+		this.tempBlockedBy = tempBlockedBy;
+	}
 	@Override
 	public String toString() {
 		return "Book [bookTitle=" + bookTitle + ", authorName=" + authorName + ", publisherName=" + publisherName
-				+ ", isbn=" + isbn + ", edition=" + edition + ", year=" + year + ", toString()="
-				+ super.toString() + "]";
+				+ ", isbn=" + isbn + ", edition=" + edition + ", year=" + year + ", genre=" + genre + ", secretCode="
+				+ secretCode + ", available=" + available + ", tempBlocked=" + tempBlocked + ", tempBlockedOn="
+				+ tempBlockedOn + ", tempBlockedBy=" + tempBlockedBy + ", toString()=" + super.toString() + "]";
 	}
 }

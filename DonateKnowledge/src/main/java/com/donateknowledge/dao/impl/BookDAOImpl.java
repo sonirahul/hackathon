@@ -8,6 +8,7 @@ import static com.mongodb.client.model.Filters.or;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -197,7 +198,7 @@ public class BookDAOImpl implements IProductDAO  {
 
 			Set<Document> cellPhoneList = null;
 
-			cellPhoneList = collection.find().filter(eq("available", true)).into(new LinkedHashSet<Document>());
+			cellPhoneList = collection.find().filter(eq("available", true)).filter(eq("tempBlocked", false)).into(new LinkedHashSet<Document>());
 
 			phoneList = new ArrayList<>();
 			for (Document itr: cellPhoneList) {
@@ -252,6 +253,37 @@ public class BookDAOImpl implements IProductDAO  {
 	public Product markSold(String isbn) throws Exception {
 		try {
 			Document update = Document.parse("{\"$set\" : {\"available\" : \"false\"}}");
+			FindOneAndUpdateOptions updateOptions = new FindOneAndUpdateOptions();
+			updateOptions.upsert(false);
+			updateOptions.returnDocument(ReturnDocument.AFTER);
+			Document book = collection.findOneAndUpdate(eq("_id", isbn), update, updateOptions );
+			if (book != null) {
+				return DonateKnowledgeUtils.jsonToJava(DonateKnowledgeUtils.javaToJson(book), Book.class);
+			}
+			else {
+				return null;
+			}
+		} catch (JsonParseException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (JsonMappingException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (JsonProcessingException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (IOException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		}
+	}
+
+	@Override
+	public Product tempBlockBook(String email, String isbn) throws Exception {
+		try {
+			Document update = Document.parse("{\"$set\" : {\"tempBlocked\" : \"true\", "
+					+ "\"tempBlockedOn\" : \"" + DonateKnowledgeUtils.javaToJson(new Date()) + "\", "
+							+ "\"tempBlockedBy\" : \"" + email + "\"}}");
 			FindOneAndUpdateOptions updateOptions = new FindOneAndUpdateOptions();
 			updateOptions.upsert(false);
 			updateOptions.returnDocument(ReturnDocument.AFTER);

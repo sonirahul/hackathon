@@ -54,4 +54,6 @@ public interface IDonateKnowledgeService {
 	Product markBookSold(String isbn) throws Exception;
 
 	User updateUserPoints(User user, BigInteger points) throws Exception;
+	
+	Product tempBlockBook(String email, String isbn) throws Exception;
 }

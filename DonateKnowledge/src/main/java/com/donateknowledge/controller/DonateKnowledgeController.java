@@ -133,6 +133,7 @@ public class DonateKnowledgeController {
 		String year = StringEscapeUtils.escapeHtml4(request.getParameter("year"));
 		String edition = StringEscapeUtils.escapeHtml4(request.getParameter("edition"));
 		String mrpPrice = StringEscapeUtils.escapeHtml4(request.getParameter("mrpPrice"));
+		String listPrice = StringEscapeUtils.escapeHtml4(request.getParameter("listPrice"));
 		String piecesInStock = StringEscapeUtils.escapeHtml4(request.getParameter("piecesInStock"));
 
 		System.out.println(
@@ -155,6 +156,7 @@ public class DonateKnowledgeController {
 		if (mrpPrice != null && !"".equals(mrpPrice)) {
 			book.setMrpPrice(new BigDecimal(mrpPrice));
 		}
+		book.setListPrice(new BigDecimal(listPrice));
 		book.setPiecesInStock(new BigInteger(piecesInStock));
 		book.setProductCategory(ProductCategory.BOOK.getValue());
 		book.setPublisherName(publisherName);
@@ -180,7 +182,8 @@ public class DonateKnowledgeController {
 		if (user != null) {
 			mv.addObject(USER, user);
 		}
-
+		service.tempBlockBook(user.getEmail(), isbn);
+		
 		// service.insertBook(book);
 		mv.addObject("phoneFinder", null);
 		mv.addObject("book", book);

@@ -295,4 +295,10 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 		return userDao.updateUserPoints(user, points);
 	}
 
+	@Override
+	public Product tempBlockBook(String email, String isbn) throws Exception {
+		// TODO Auto-generated method stub
+		return bookDao.tempBlockBook(email, isbn);
+	}
+
 }
