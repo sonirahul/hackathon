@@ -197,7 +197,7 @@ public class BookDAOImpl implements IProductDAO  {
 
 			Set<Document> cellPhoneList = null;
 
-			cellPhoneList = collection.find().into(new LinkedHashSet<Document>());
+			cellPhoneList = collection.find().filter(eq("available", true)).into(new LinkedHashSet<Document>());
 
 			phoneList = new ArrayList<>();
 			for (Document itr: cellPhoneList) {
@@ -233,6 +233,35 @@ public class BookDAOImpl implements IProductDAO  {
 			}
 
 			return phoneList;
+		} catch (JsonParseException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (JsonMappingException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (JsonProcessingException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (IOException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		}
+	}
+
+	@Override
+	public Product markSold(String isbn) throws Exception {
+		try {
+			Document update = Document.parse("{\"$set\" : {\"available\" : \"false\"}}");
+			FindOneAndUpdateOptions updateOptions = new FindOneAndUpdateOptions();
+			updateOptions.upsert(false);
+			updateOptions.returnDocument(ReturnDocument.AFTER);
+			Document book = collection.findOneAndUpdate(eq("_id", isbn), update, updateOptions );
+			if (book != null) {
+				return DonateKnowledgeUtils.jsonToJava(DonateKnowledgeUtils.javaToJson(book), Book.class);
+			}
+			else {
+				return null;
+			}
 		} catch (JsonParseException e) {
 			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
 			throw e;

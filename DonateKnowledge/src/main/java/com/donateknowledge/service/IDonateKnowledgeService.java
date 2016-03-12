@@ -49,4 +49,6 @@ public interface IDonateKnowledgeService {
 	List<Product> fetchAllBooks(String str) throws Exception;
 	
 	List<Product> fetchAllBooksByInsertId(String str) throws Exception;
+
+	Product markBookSold(String isbn) throws Exception;
 }

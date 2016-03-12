@@ -20,6 +20,7 @@ public class Book extends Product {
     private String genre;
     private String secretCode;
     private String points;
+    private boolean available = true;
     
     public String getBookTitle() {
 		return bookTitle;
@@ -78,6 +79,12 @@ public class Book extends Product {
 		return points;
 	}
 	
+	public boolean isAvailable() {
+		return available;
+	}
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
 	@Override
 	public String toString() {
 		return "Book [bookTitle=" + bookTitle + ", authorName=" + authorName + ", publisherName=" + publisherName
