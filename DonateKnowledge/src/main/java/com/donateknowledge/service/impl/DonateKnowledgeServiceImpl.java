@@ -290,9 +290,9 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 	}
 
 	@Override
-	public User updateUserPoints(User user, BigInteger points) throws Exception {
+	public User updateUserPoints(String email, BigInteger points) throws Exception {
 		// TODO Auto-generated method stub
-		return userDao.updateUserPoints(user, points);
+		return userDao.updateUserPoints(email, points);
 	}
 
 	@Override

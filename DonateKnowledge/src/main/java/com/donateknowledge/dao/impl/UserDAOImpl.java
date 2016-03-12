@@ -150,13 +150,13 @@ public class UserDAOImpl implements IUserDAO {
 	}
 
 	@Override
-	public User updateUserPoints(User user, BigInteger points) throws Exception {
+	public User updateUserPoints(String email, BigInteger points) throws Exception {
 		try {
 			Document update = Document.parse("{\"$inc\" : {\"points\": " + points + "}}" );
 			FindOneAndUpdateOptions updateOptions = new FindOneAndUpdateOptions();
 			updateOptions.upsert(false);
 			updateOptions.returnDocument(ReturnDocument.AFTER);
-			Document book = collection.findOneAndUpdate(eq("_id", user.getEmail()), update, updateOptions );
+			Document book = collection.findOneAndUpdate(eq("_id", email), update, updateOptions );
 			if (book != null) {
 				return DonateKnowledgeUtils.jsonToJava(DonateKnowledgeUtils.javaToJson(book), User.class);
 			}

@@ -188,8 +188,6 @@ public class DonateKnowledgeController {
 		mv.addObject("phoneFinder", null);
 		mv.addObject("book", book);
 
-		book.getSecretCode();
-		
 //		mail.sendMail("ashishthomas177@gmail.com", "soni_rahul@live.com", book.getSecretCode(), book.getSecretCode());
 		return mv;
 	}

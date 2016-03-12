@@ -71,7 +71,8 @@ public class DonateKnowledgeAjaxController {
 			book = (Book) service.markBookSold(isbn);
 			
 			User user = service.getLoggedInUser(cookieValue, session, response);
-			service.updateUserPoints(user, book.getListPrice().toBigInteger());
+			service.updateUserPoints(user.getEmail(), book.getListPrice().toBigInteger());
+			service.updateUserPoints(book.getTempBlockedBy(), book.getListPrice().toBigInteger().negate());
 			return new Document("passCodeValidated", true);
 		}
 		return new Document("passCodeValidated", false);

@@ -12,5 +12,5 @@ public interface IUserDAO {
 
 	User validateUser(User validateUser, boolean updateLastLogin);
 	
-	User updateUserPoints(User user, BigInteger points) throws Exception;
+	User updateUserPoints(String email, BigInteger points) throws Exception;
 }
