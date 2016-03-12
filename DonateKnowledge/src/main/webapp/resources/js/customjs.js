@@ -101,7 +101,6 @@ function display(data) {
 	
 }
 function claimPointsFunc(isbn,index) {
-	alert(isbn);
 	var reqData=isbn+","+$("#passCodeValue_" + index).val();
 	
 	$.ajax({
@@ -114,7 +113,7 @@ function claimPointsFunc(isbn,index) {
 		success : function(data) {
 			console.log("SUCCESS: ", data);
 			var json = JSON.stringify(data.passCodeValidated, null, 4);
-			alert(json);
+			
 			if (json == 'true') {
 				$('#loginModal1').modal('show');
 			}

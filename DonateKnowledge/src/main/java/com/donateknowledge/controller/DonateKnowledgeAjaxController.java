@@ -66,7 +66,8 @@ public class DonateKnowledgeAjaxController {
 		String passcode = tokens[1];
 		
 		Book book = (Book) service.fetchBookById(isbn);
-		if (book.getSecretCode().equalsIgnoreCase(passcode)) { 
+		if (book.getSecretCode().equalsIgnoreCase(passcode)) {
+			service.markBookSold(isbn);
 			return new Document("passCodeValidated", true);
 		}
 		return new Document("passCodeValidated", false);

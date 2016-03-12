@@ -283,4 +283,10 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 		return bookDao.fetchAllBooksByInsertId(str);
 	}
 
+	@Override
+	public Product markBookSold(String isbn) throws Exception {
+		// TODO Auto-generated method stub
+		return bookDao.markSold(isbn);
+	}
+
 }

@@ -20,4 +20,6 @@ public interface IProductDAO {
 
 	List<Product> fetchCellPhoneByTextIndex(String searchArr, int skip, int limit, boolean fetchImage)
 			throws Exception;
+	
+	Product markSold(String isbn) throws Exception;
 }
