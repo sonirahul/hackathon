@@ -20,6 +20,7 @@ public class Product {
 	@JsonProperty("_id")
 	private String productId; //ISBN in case of books
 	private String productImage;
+	private BigDecimal listPrice;
 	
 	public String getInsertedBy() {
 		return insertedBy;
@@ -69,4 +70,12 @@ public class Product {
 	public void setProductImage(String productImage) {
 		this.productImage = productImage;
 	}
+	public BigDecimal getListPrice() {
+		return listPrice;
+	}
+	public void setListPrice(BigDecimal listPrice) {
+		this.listPrice = listPrice;
+	}
+	
+	
 }

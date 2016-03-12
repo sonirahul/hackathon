@@ -74,7 +74,7 @@ public class Book extends Product {
 	}
 	
 	public String getPoints() {
-		this.points = super.getMrpPrice().multiply( new BigDecimal("7.0")).toString();
+		this.points = super.getMrpPrice().multiply( new BigDecimal("0.70")).toString();
 		return points;
 	}
 	
