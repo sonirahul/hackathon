@@ -97,7 +97,7 @@ td.pz {
 						<td class="col-sm-1">${book.piecesInStock}</td>
 						<td class="col-sm-1">${(book.productImage)!"Not Available"}</td>
 						<td class="col-sm-1">${book.publisherName}</td>
-						<td class="col-sm-1">${book.year}</td>
+						<td class="col-sm-1">${book.year?c}</td>
 					</tr>
 					</#list> 
 					</#if>
