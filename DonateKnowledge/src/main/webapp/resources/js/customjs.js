@@ -30,7 +30,7 @@ $(document).ready(function () {
         }
     });
 	$("#re-email").blur(function() {
-		var email = $("#email").val();
+		var email = $("#email").val();passCodeValue
 		var reEmail = $("#re-email").val();
 		
 		if (email != '' && reEmail != '' && email == reEmail) {
@@ -40,6 +40,8 @@ $(document).ready(function () {
 			alert("both aren't equal");
 		}
 	});
+	$('#loginModal1').modal({ show: false});
+	$('#loginModal2').modal({ show: false});
 });
 
 function addeditproduct() {
@@ -98,4 +100,36 @@ function display(data) {
 	alert("user exists: " + json);
 	
 }
+function claimPointsFunc(isbn,index) {
+	alert(isbn);
+	var reqData=isbn+","+$("#passCodeValue_" + index).val();
+	
+	$.ajax({
+		type : "POST",
+		contentType : "application/json",
+		url : contextPath + "/validatePasscode",
+		data : JSON.stringify(reqData),
+		dataType : 'json',
+		timeout : 100000,
+		success : function(data) {
+			console.log("SUCCESS: ", data);
+			var json = JSON.stringify(data.passCodeValidated, null, 4);
+			alert(json);
+			if (json == 'true') {
+				$('#loginModal1').modal('show');
+			}
+			else{
+				$('#loginModal2').modal('show');
+			}
 
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+			display(e);
+		},
+		done : function(e) {
+			console.log("DONE");
+			//enableSearchButton(true);
+		}
+	});
+}

@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.donateknowledge.dto.product.Product;
+import com.donateknowledge.dto.product.book.Book;
 import com.donateknowledge.dto.user.User;
 import com.donateknowledge.service.IDonateKnowledgeService;
 
@@ -55,6 +56,20 @@ public class DonateKnowledgeAjaxController {
 			return new Document("userExists", true);
 		}
 		return new Document("userExists", false);
+	}
+
+	@RequestMapping(value = "/validatePasscode", method = RequestMethod.POST)
+	public Document validatePasscode(@RequestBody String reqData) throws Exception {
+		
+		String[] tokens = reqData.replaceAll("\"", "").split(",");
+		String isbn = tokens[0];
+		String passcode = tokens[1];
+		
+		Book book = (Book) service.fetchBookById(isbn);
+		if (book.getSecretCode().equalsIgnoreCase(passcode)) { 
+			return new Document("passCodeValidated", true);
+		}
+		return new Document("passCodeValidated", false);
 	}
 	
 	@RequestMapping(value = "/addeditproduct", method = RequestMethod.POST) 
