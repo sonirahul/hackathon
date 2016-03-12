@@ -42,6 +42,38 @@ td.pz {
 	overflow: hidden
 }
 </style>
+<script>
+	function preventListPrize() {
+		var mrpVal = $("#uploaderMrpPrice").val();
+		var maxListPrize = mrpVal * 0.7;
+		var listVal = $("#uploaderListPrice").val();
+		if (listVal > maxListPrize)
+			alert("chal");
+		return false;
+	}
+</script>
+<script>
+	function preventListPrize(input) {
+		var mrpVal = $("#uploaderMrpPrice").val();
+		var maxListPrize = mrpVal * 0.7;
+		if (input.value > maxListPrize) {
+			alert("You cannot exceed 70 percent of MRP which is "
+					+ maxListPrize);
+			return false;
+		}
+	}
+	function preventListSubmit(e) {
+		var mrpVal = $("#uploaderMrpPrice").val();
+		var listVal = $("#uploaderListPrice").val();
+		var maxListPrize = mrpVal * 0.7;
+		if (listVal > maxListPrize) {
+			alert("You cannot exceed 70 percent of MRP which is "
+					+ maxListPrize);
+			e.preventDefault();
+			return false;
+		}
+	}
+</script>
 <div id="myForm" class="container">
 	<ol class="breadcrumb">
 		<li><a href="${rc.getContextPath()}/">Donation</a></li>
@@ -62,13 +94,13 @@ td.pz {
 					<tr>
 						<td>Author Name</td>
 						<td colspan="2" class="pz"><input type="text"
-							name="authorName" id="uploaderModelName" class="pit" 
+							name="authorName" id="uploaderModelName" class="pit"
 							required="required"></td>
 					</tr>
 					<tr>
 						<td>Publisher Name</td>
 						<td colspan="2" class="pz"><input type="text"
-							name="publisherName" id="uploaderpublisherName" class="pit" 
+							name="publisherName" id="uploaderpublisherName" class="pit"
 							required="required"></td>
 					</tr>
 					<tr>
@@ -77,12 +109,11 @@ td.pz {
 								<option value="Science fiction">Science Fiction</option>
 						</select></td>
 					</tr>
-					
+
 					<tr>
 						<td>ISBN</td>
-						<td colspan="2" class="pz"><input type="text"
-							name="isbn" id="uploaderISBN" class="pit" 
-							required="required"></td>
+						<td colspan="2" class="pz"><input type="text" name="isbn"
+							id="uploaderISBN" class="pit" required="required"></td>
 					</tr>
 					<tr>
 						<td>Book Image</td>
@@ -91,28 +122,34 @@ td.pz {
 					</tr>
 					<tr>
 						<td>Year</td>
-						<td colspan="2" class="pz"><input type="number"
-							name="year" id="uploaderReleaseDate" class="pit" ></td>
+						<td colspan="2" class="pz"><input type="number" name="year"
+							id="uploaderReleaseDate" class="pit"></td>
 					</tr>
 					<tr>
 						<td>Edition</td>
-						<td colspan="2" class="pz"><input type="text"
-							name="edition" id="uploaderEdition" class="pit"></td>
+						<td colspan="2" class="pz"><input type="text" name="edition"
+							id="uploaderEdition" class="pit"></td>
 					</tr>
 					<tr>
 						<td>Mrp Price</td>
-						<td colspan="2" class="pz"><input type="number" name="mrpPrice"
-							id="uploaderMrpPrice" class="pit" 
+						<td colspan="2" class="pz"><input type="number"
+							name="mrpPrice" id="uploaderMrpPrice" class="pit"
 							required="required"></td>
 					</tr>
 					<tr>
+						<td>List Price</td>
+						<td colspan="2" class="pz"><input type="number"
+							name="listPrice" id="uploaderListPrice" class="pit"
+							required="required" onblur="preventListPrize(this);" /></td>
+					</tr>
+					<tr>
 						<td>No of Books</td>
-						<td colspan="2" class="pz"><input type="number" name="piecesInStock"
-							id="uploaderPiecesInStock" class="pit"></td>
+						<td colspan="2" class="pz"><input type="number"
+							name="piecesInStock" id="uploaderPiecesInStock" class="pit"></td>
 					</tr>
 					<tr>
 						<td colspan="3" class="pz"><input type="submit" name=""
-							id="submit" id="uploader" class="pit btn-primary" value="submit" /></td>
+							id="submit" onclick="return preventListSubmit(event);" id="uploader" class="pit btn-primary" value="submit" /></td>
 					</tr>
 				</tbody>
 			</table>
