@@ -4,6 +4,7 @@ import static com.donateknowledge.utils.DonateKnowledgeUtils.getDateTimeToday;
 import static com.donateknowledge.utils.DonateKnowledgeUtils.getEnumMappedList;
 import static java.util.Arrays.asList;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,6 +41,8 @@ public class User {
 	private boolean registered;
 	private Date registeredDate;
 	private List<String> userRole;
+	private BigInteger points;
+	
 
 	public Address getAddress() {
 		return address;
@@ -212,6 +215,14 @@ public class User {
 			userRole.add(UserRole.USER.toString());
 		}
 		return userRole;
+	}
+	
+	
+	public BigInteger getPoints() {
+		return points;
+	}
+	public void setPoints(BigInteger points) {
+		this.points = points;
 	}
 	@Override
 	public String toString() {
