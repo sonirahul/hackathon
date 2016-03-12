@@ -1,7 +1,5 @@
 package com.donateknowledge.dto.product.book;
 
-import java.math.BigDecimal;
-
 import com.donateknowledge.dto.product.Product;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -19,7 +17,6 @@ public class Book extends Product {
     private Integer year;
     private String genre;
     private String secretCode;
-    private String points;
     private boolean available = true;
     
     public String getBookTitle() {
@@ -72,11 +69,6 @@ public class Book extends Product {
 	}
 	public void setSecretCode(String secretCode) {
 		this.secretCode = secretCode;
-	}
-	
-	public String getPoints() {
-		this.points = super.getMrpPrice().multiply( new BigDecimal("0.70")).toString();
-		return points;
 	}
 	
 	public boolean isAvailable() {

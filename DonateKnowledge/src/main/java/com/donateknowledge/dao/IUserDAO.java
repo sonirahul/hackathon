@@ -1,5 +1,7 @@
 package com.donateknowledge.dao;
 
+import java.math.BigInteger;
+
 import com.donateknowledge.dto.user.User;
 
 public interface IUserDAO {
@@ -9,4 +11,6 @@ public interface IUserDAO {
 	User fetchUserByEmail(String email, boolean updateLastLogin) throws Exception;
 
 	User validateUser(User validateUser, boolean updateLastLogin);
+	
+	User updateUserPoints(User user, BigInteger points) throws Exception;
 }

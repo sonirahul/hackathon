@@ -21,7 +21,7 @@ public class Product {
 	private String productId; //ISBN in case of books
 	private String productImage;
 	private BigDecimal listPrice;
-	
+
 	public String getInsertedBy() {
 		return insertedBy;
 	}
@@ -74,8 +74,10 @@ public class Product {
 		return listPrice;
 	}
 	public void setListPrice(BigDecimal listPrice) {
-		this.listPrice = listPrice;
+		if(getMrpPrice().multiply( new BigDecimal("0.70")).compareTo(listPrice) >= 0) {
+			this.listPrice = listPrice;
+		}
 	}
-	
-	
+
+
 }

@@ -59,7 +59,8 @@ public class DonateKnowledgeAjaxController {
 	}
 
 	@RequestMapping(value = "/validatePasscode", method = RequestMethod.POST)
-	public Document validatePasscode(@RequestBody String reqData) throws Exception {
+	public Document validatePasscode(@RequestBody String reqData, @CookieValue(value = SESSION_COOKIE, defaultValue = SESSION_COOKIE_DEFAULT) String cookieValue, 
+			HttpSession session, HttpServletResponse response) throws Exception {
 		
 		String[] tokens = reqData.replaceAll("\"", "").split(",");
 		String isbn = tokens[0];
@@ -67,7 +68,10 @@ public class DonateKnowledgeAjaxController {
 		
 		Book book = (Book) service.fetchBookById(isbn);
 		if (book.getSecretCode().equalsIgnoreCase(passcode)) {
-			service.markBookSold(isbn);
+			book = (Book) service.markBookSold(isbn);
+			
+			User user = service.getLoggedInUser(cookieValue, session, response);
+			service.updateUserPoints(user, book.getListPrice().toBigInteger());
 			return new Document("passCodeValidated", true);
 		}
 		return new Document("passCodeValidated", false);

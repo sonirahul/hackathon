@@ -12,6 +12,8 @@ import static com.donateknowledge.utils.DonateKnowledgeUtils.makePasswordHash;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.text.MessageFormat;
 
 import org.bson.Document;
 import org.bson.json.JsonParseException;
@@ -23,12 +25,15 @@ import org.springframework.stereotype.Repository;
 import com.donateknowledge.configurator.ApplicationConfigurator;
 import com.donateknowledge.dao.IUserDAO;
 import com.donateknowledge.dto.user.User;
+import com.donateknowledge.utils.DonateKnowledgeUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.mongodb.ErrorCategory;
 import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.ReturnDocument;
 
 @Repository
 public class UserDAOImpl implements IUserDAO {
@@ -142,5 +147,34 @@ public class UserDAOImpl implements IUserDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public User updateUserPoints(User user, BigInteger points) throws Exception {
+		try {
+			Document update = Document.parse("{\"$inc\" : {\"points\": " + points + "}}" );
+			FindOneAndUpdateOptions updateOptions = new FindOneAndUpdateOptions();
+			updateOptions.upsert(false);
+			updateOptions.returnDocument(ReturnDocument.AFTER);
+			Document book = collection.findOneAndUpdate(eq("_id", user.getEmail()), update, updateOptions );
+			if (book != null) {
+				return DonateKnowledgeUtils.jsonToJava(DonateKnowledgeUtils.javaToJson(book), User.class);
+			}
+			else {
+				return null;
+			}
+		} catch (JsonParseException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (JsonMappingException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (JsonProcessingException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		} catch (IOException e) {
+			LOGGER.error(MessageFormat.format("Exception occurred in fetchCellPhone().\nException: {0}", e));
+			throw e;
+		}
 	}
 }

@@ -1,5 +1,6 @@
 package com.donateknowledge.service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 
@@ -51,4 +52,6 @@ public interface IDonateKnowledgeService {
 	List<Product> fetchAllBooksByInsertId(String str) throws Exception;
 
 	Product markBookSold(String isbn) throws Exception;
+
+	User updateUserPoints(User user, BigInteger points) throws Exception;
 }

@@ -86,13 +86,18 @@ td.pz {
 						<td align="center" class="col-sm-1">${book.publisherName}</td>
 						<td align="center" class="col-sm-1">${book.year?c}</td>
 						<td align="center" class="col-sm-1">Need this Field</td>
+						<#if book.available>
 						<td align="center" class="col-sm-1"><input id="passCodeValue_${book?index}" type="text"
 							name="PassCode"></td>
 						<td align="center" class="col-sm-1">
 						<!-- data-target="#loginModal1" data-toggle="modal" -->
 						<input type="button" name=""
 							id="claimPointsButton" class="pit btn-primary" value="submit" onclick="claimPointsFunc('${book.isbn}','${book?index}')" /></td>
-						
+						 </#if>
+						 <#if !book.available>
+						 <td colspan="2" align="center" class="col-sm-1"><input type="text"
+							value="Already Redemed"></td>
+						 </#if>
 					</tr>
 					</#list> </#if>
 				</tbody>

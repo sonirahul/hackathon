@@ -289,4 +289,10 @@ public class DonateKnowledgeServiceImpl implements IDonateKnowledgeService {
 		return bookDao.markSold(isbn);
 	}
 
+	@Override
+	public User updateUserPoints(User user, BigInteger points) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.updateUserPoints(user, points);
+	}
+
 }

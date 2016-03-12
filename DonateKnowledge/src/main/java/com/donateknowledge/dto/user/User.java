@@ -41,7 +41,7 @@ public class User {
 	private boolean registered;
 	private Date registeredDate;
 	private List<String> userRole;
-	private BigInteger points;
+	private BigInteger points = BigInteger.ZERO;
 	
 
 	public Address getAddress() {
